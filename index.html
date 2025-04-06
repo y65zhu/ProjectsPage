@@ -2,54 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Annora Zhu Portfolio - Home</title>
+  <title>Annora Zhu Portfolio - Projects</title>
   <style>
-    /* Reset & Fonts */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: black;
       color: white;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
     }
 
-    /* Header Styles */
     header {
-      background-color: #000000;
+      background-color: black;
       padding: 20px;
     }
+
     header nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
     }
+
     header nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
     }
+
     header nav ul li {
       margin-right: 20px;
     }
+
     header nav ul li a {
       text-decoration: none;
       color: #FFFFFF;
       font-weight: bold;
     }
+
     header nav ul li a:hover,
     header nav ul li a:active {
       color: #007BFF;
     }
+
     header h1 {
       color: white;
       margin: 0;
       font-size: 2em;
-      font-family: Arial, sans-serif;
     }
+
     .social-icons a {
       text-decoration: none;
       margin-left: 10px;
@@ -57,224 +58,73 @@
     }
 
     main {
-      background-color: black;
-      text-align: center;
-    }
-
-    /* ABOUT section */
-    about p {
-      color: white;
-      line-height: 20px;
-      font-size: 20px;
-    }
-    about h2 {
-      color: white;
-      line-height: 15px;
-      font-size: 60px;
-    }
-    about img {
-      width: 60%;
-      height: auto;
-      border-radius: 8px;
-      margin: 20px 0px;
-    }
-
-    .divider-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: black;
-      padding: 20px 0;
-      color: white;
-    }
-    .divider-text {
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-      flex: 1;
-    }
-    .divider-image {
-      flex: 2;
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* Education Section */
-    .education {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 60px 20px 40px;
-    }
-    .education .left-content {
-      width: 50%;
-      text-align: left;
-    }
-    .education .left-content ul {
-      color: white;
-      font-size: 20px;
-      list-style-type: disc;
-      margin-left: 40px;
-    }
-    .education .right-content {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .education .right-content img {
-      width: 30%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    /* Personal Identity */
-    .personal-identity {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       padding: 40px;
-      color: white;
-      text-align: left;
+      text-align: center;
     }
-    .personal-identity .left-content,
-    .personal-identity .right-content {
-      padding: 20px 50px;
-      width: 50%;
-    }
-    .personal-identity .right-content p {
-      font-size: 20px;
-      line-height: 1.5;
-    }
-    .personal-identity h2 {
+
+    h2 {
       font-size: 3em;
-      margin-bottom: 20px;
-    }
-    .quote {
-      font-style: italic;
-      font-size: 1.2em;
-      margin-bottom: 5px;
-    }
-    .author {
-      margin-bottom: 30px;
-      font-size: 1em;
-      opacity: 0.8;
-    }
-
-    /* Skills Section */
-    .skills-section {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      background-color: black;
-      color: white;
-      padding: 40px;
-    }
-    .skills-left, .skills-right {
-      padding: 50px;
-    }
-    .skills-left {
-      width: 40%;
-      text-align: left;
-    }
-    .skills-left h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-    .adobe-icons {
-      display: flex;
-      gap: 20px;
-    }
-    .adobe-icons img {
-      width: 60px;
-      height: auto;
-    }
-    .skills-right {
-      width: 50%;
-      text-align: left;
-    }
-    .skills-right details {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #444;
-      padding-bottom: 10px;
-    }
-    .skills-right summary {
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-    .skills-right summary::after {
-      content: " ▼";
-      font-size: 0.8em;
-      margin-left: 5px;
-    }
-    .skills-right details[open] summary::after {
-      content: " ▲";
-    }
-    .skills-right details p {
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    /* Work Experience Timeline */
-    .work-experience {
-      background-color: black;
-      color: white;
-      padding: 60px 40px;
-      text-align: left;
-    }
-    .work-experience h2 {
-      font-size: 2.5em;
-      margin-bottom: 30px;
-      text-align: center;
-    }
-    .work-experience .job {
       margin-bottom: 40px;
     }
-    .work-experience .job h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
+
+    .project-card {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 800px;
+      text-align: left;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
-    .work-experience .job .date {
-      font-size: 0.9em;
-      color: #aaa;
-      margin-left: 10px;
-      font-weight: normal;
+
+    .project-card h3 {
+      margin-top: 0;
+      color: #007BFF;
     }
-    .work-experience ul {
-      list-style-type: disc;
-      margin-left: 25px;
-      font-size: 1.1em;
+
+    .project-card p {
       line-height: 1.6;
     }
 
-    /* Footer */
+    .project-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
     footer {
       background-color: black;
       padding: 20px;
       text-align: center;
     }
+
     footer nav ul {
       list-style: none;
       margin: 0;
       padding: 0;
       display: inline-flex;
     }
+
     footer nav ul li {
       margin: 0 30px;
     }
+
     footer nav ul li a {
       text-decoration: none;
       color: #FFFFFF;
     }
+
     footer nav ul li a:hover {
       color: #007BFF;
     }
+
     footer p {
       margin: 10px 0;
       font-size: 0.9em;
       color: #FFFFFF;
     }
+
     footer .social-icons a {
       text-decoration: none;
       margin: 0 5px;
@@ -283,152 +133,105 @@
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
     <nav>
       <ul>
-        <li><a href="index.html">HOME</a></li>
+        <li><a href="https://y65zhu.github.io/Personal-Website-Design/">HOME</a></li>
         <li><a href="https://y65zhu.github.io/ProjectsPage/">PROJECTS</a></li>
-        <li><a href="gallery.html">GALLERY</a></li>
+        <li><a href="https://y65zhu.github.io/gallery/">GALLERY</a></li>
         <li><a href="https://y65zhu.github.io/contact/">CONTACT</a></li>
       </ul>
       <h1>Annora Zhu Portfolio</h1>
       <div class="social-icons">
-        <a href="https://facebook.com" target="_blank">📘</a>
-        <a href="https://instagram.com" target="_blank">📸</a>
+        <a href="https://www.linkedin.com/in/annora-zhu-1355352b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">📘</a>
+        <a href="https://www.instagram.com/zz_annora?igsh=Z25raTdkdGxoYXlj&utm_source=qr" target="_blank">📸</a>
         <a href="mailto:y65zhu@uwaterloo.ca">✉️</a>
       </div>
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main>
-    <about>
-      <img src="WechatIMG935.jpg" alt="self portrait">
-      <p>ABOUT ME</p>
-      <h2>Photographer</h2>
-      <h2>Graphic Designer</h2>
-      <h2>Marketing Specialist</h2>
-    </about>
+    <h2>My Projects</h2>
 
-    <section class="divider-section">
-      <span class="divider-text">ANNORA ZHU</span>
-      <img src="wavy-line.png" alt="Wavy line" class="divider-image" />
-      <span class="divider-text">EDUCATION</span>
-    </section>
+    <div class="project-card">
+      <h3>✨ Excel Gum Rebrand</h3>
+      <p>
+        For this project made with my partner Sofia Xu, we gave Excel Gum a bold glow-up version for Gen Z’s. To let Excel adapt to their fast-paced, style-savvy personality. Inspired by the crisp blast of a fresh chew, we kept the iconic icy-blue vibe but leveled it up with a sleeker, more modern visual identity.
+      </p>
+      <a href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:8dc182b8-286a-5a15-840b-fe08ccf0c6c2?invite=true&accept=true&promoid=Z2G1FQKR&mv=other" target="_blank" style="color:#00ffff; font-weight:bold;">Check out the full presentation</a>
+      <img src="mockup-set02.png" alt="Excel Gum mockup">
 
-    <!-- Education -->
-    <section class="education">
-      <div class="left-content">
-        <ul>
-          <li>CSSD</li>
-          <li>Bachelor of Global Business and Digital Arts</li>
-        </ul>
-      </div>
-      <div class="right-content">
-        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/University_of_Waterloo_seal.svg/250px-University_of_Waterloo_seal.svg.png" alt="University Image">
-      </div>
-    </section>
-
-    <!-- Identity -->
-    <section class="personal-identity">
-      <div class="left-content">
-        <h2>Personal Identity</h2>
-        <p class="quote">“The best preparation for tomorrow is doing your best today.”</p>
-        <p class="author">— H. Jackson Brown, Jr.</p>
-      </div>
-      <div class="right-content">
-        <p>I do 3 things—photographing, marketing, and designing products that improve life.</p>
-        <p>I've shot commercial photos for beauty clinics, game shops, and even student projects that turned into real-world portfolios.</p>
-        <p>When it comes to design, I focus on clarity, usability, and impact—thoughtful design that connects.</p>
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section class="skills-section">
-      <div class="skills-left">
-        <h2>SKILL SET</h2>
-        <div class="adobe-icons">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Adobe_Illustrator_CC_icon.svg/1200px-Adobe_Illustrator_CC_icon.svg.png" alt="Illustrator">
-          <img src="https://images-ext-1.discordapp.net/external/6FUW51ynpeRJW0uDkVyUXU60ruOpw4F21huOvcAkLbA/https/upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/2101px-Adobe_Photoshop_CC_icon.svg.png" alt="Photoshop">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Adobe_Premiere_Pro_CC_icon.svg/1200px-Adobe_Premiere_Pro_CC_icon.svg.png" alt="Premiere Pro">
-          <img src="https://images-ext-1.discordapp.net/external/M4ca9kHOWmcN8QxDvDrXdZ4EK6QYTYrF7XAR7udH-2I/https/upload.wikimedia.org/wikipedia/commons/thumb/4/48/Adobe_InDesign_CC_icon.svg/2101px-Adobe_InDesign_CC_icon.svg.png" alt="InDesign">
-          <img src="https://cdn.discordapp.com/attachments/1343473950222716969/1356860620078583891/solution_logo_04032024_57784323.png" alt="Custom Tool">
-        </div>
-      </div>
-      <div class="skills-right">
-        <details>
-          <summary>Creativity & Innovation</summary>
-          <p>Experienced in posters, films, and app prototyping.</p>
-        </details>
-        <details>
-          <summary>Communication</summary>
-          <p>Skilled through customer roles in salons, clinics, and more.</p>
-        </details>
-        <details>
-          <summary>Technical Expertise</summary>
-          <p>Experience with coding games, interfaces, and tools.</p>
-        </details>
-        <details>
-          <summary>Adaptability</summary>
-          <p>Quick learner with a flexible mindset and curiosity.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- Work Experience Timeline -->
-    <section class="work-experience">
-      <h2>Work Experience</h2>
-
-      <div class="job">
-        <h3>📍 Renison ELI Peer Helper <span class="date">June 2024 – Current</span></h3>
-        <ul>
-          <li>Educated exchange students on discussions and social advocacy</li>
-          <li>Planned community events and improved volunteer onboarding</li>
-        </ul>
+      <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:100%; border-radius:10px; margin-top:20px;">
+        <iframe src="https://www.youtube.com/embed/6c8f2D7rC6c" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <div class="job">
-        <h3>📍 Miniverse VR Game Shop <span class="date">Jan 2025 – Now</span></h3>
-        <ul>
-          <li>Captured high-quality VR photos for marketing</li>
-          <li>Designed custom event posters and materials</li>
-          <li>Troubleshot VR systems during parties for smooth gameplay</li>
-        </ul>
+      <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
+        <iframe src="https://www.instagram.com/reel/DHCz4vQtCEI/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex: 1 1 48%; border-radius: 10px;"></iframe>
+        <iframe src="https://www.instagram.com/reel/DHC2AvXNkFn/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex: 1 1 48%; border-radius: 10px;"></iframe>
       </div>
 
-      <div class="job">
-        <h3>📍 Marketing Specialist – Speedup Education <span class="date">Jan 2024 – Feb 2024</span></h3>
-        <ul>
-          <li>Created content for student campaigns and product launches</li>
-          <li>Analyzed feedback, led trend research, adjusted strategies</li>
-        </ul>
+      <p>
+        Stronger flavor cues and greater contrast are features of our redesigned package, and Excel became more than just gum thanks to the #FreshAF social promotion. We made remaining fresh feel like a flex with streetwear collaborations, AR filters, and Instagram challenges.
+      </p>
+    </div>
+
+    <div class="project-card">
+      <h3>📱 CAN Talk App Design</h3>
+      <p>
+        Our app is designed to help newcomers adapt to Canadian English through a user-friendly, interactive experience. With features like pronunciation practice, a guessing game for idiomatic expressions, and an AI chatbot, users can gradually improve their conversational fluency, accent, and understanding of Canadian culture.
+      </p>
+
+      <p>
+        👉 <a href="https://www.canva.com/design/DAGXXaes4Gg/nUxMYfspzq5fPLuXsVMQZg/view?utm_content=DAGXXaes4Gg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8078bdb6f0" target="_blank" style="color:#00ffff; font-weight:bold;">View Presentation on Canva</a>
+      </p>
+
+      <p>
+        🎨 <a href="https://www.figma.com/proto/dIOZMxhIneCquwTWyfRGYf/Wu_Nicole_M3Figma?node-id=6-413&starting-point-node-id=6%3A413&t=BmBju4itB9U8lihN-1" target="_blank" style="color:#00ffff; font-weight:bold;">Explore the Figma Prototype</a>
+      </p>
+
+      <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+        <img src="1.png" alt="Wireframe Set 1" style="width: 48%; border-radius: 10px;">
+        <img src="2.png" alt="Wireframe Set 2" style="width: 48%; border-radius: 10px;">
       </div>
 
-      <div class="job">
-        <h3>📍 Social Media Specialist – LZH Beauty Clinic <span class="date">Oct 2022 – Jun 2023</span></h3>
-        <ul>
-          <li>Managed brand identity across Xiaohongshu and WeChat</li>
-          <li>Boosted engagement with targeted campaigns and visuals</li>
-        </ul>
+      <div style="margin-top: 20px;">
+        <img src="3.png" alt="Full Screen Flow" style="width: 100%; border-radius: 10px;">
       </div>
-    </section>
+
+      <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+        <img src="use1.png" alt="Storyboard: Preparing for Interview" style="width: 48%; border-radius: 10px;">
+        <img src="use2.png" alt="Storyboard: Doing the Lessons" style="width: 48%; border-radius: 10px;">
+      </div>
+    </div>
+
+    <div class="project-card">
+      <h3>🎧 Audio Documentary</h3>
+      <p>
+        The documentary focuses on Jane's life as a night shift janitor at the school. She has been part of the maintenance team for years and shares her work experience cleaning part of our Waterloo campus school buildings.
+      </p>
+      <p>
+        She reflects on the happiness and loneliness of her job, and also expresses her satisfaction with contributing to the educational setting.
+      </p>
+
+      <audio controls style="width: 100%; margin-top: 15px; border-radius: 10px;">
+        <source src="Zhu_PRJ3_FINAL.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     <nav>
       <ul>
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="projects.html">PROJECTS</a></li>
-        <li><a href="gallery.html">GALLERY</a></li>
+        <li><a href="https://y65zhu.github.io/Personal-Website-Design/">HOME</a></li>
+        <li><a href="https://y65zhu.github.io/ProjectsPage/">PROJECTS</a></li>
+        <li><a href="https://y65zhu.github.io/gallery/">GALLERY</a></li>
       </ul>
     </nav>
     <p>Hand-coded by Annora Zhu</p>
     <div class="social-icons">
-      <a href="https://facebook.com" target="_blank">📘</a>
-      <a href="https://instagram.com" target="_blank">📸</a>
+      <a href="https://www.linkedin.com/in/annora-zhu-1355352b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">📘</a>
+      <a href="https://www.instagram.com/zz_annora?igsh=Z25raTdkdGxoYXlj&utm_source=qr" target="_blank">📸</a>
       <a href="mailto:y65zhu@uwaterloo.ca">✉️</a>
     </div>
   </footer>
