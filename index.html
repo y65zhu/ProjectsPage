@@ -38,6 +38,7 @@
         text-decoration: none;
         color: #FFFFFF;
         font-weight: bold;
+        transition: color 0.3s ease;
       }
 
       header nav ul li a:hover,
@@ -55,6 +56,7 @@
         text-decoration: none;
         margin-left: 10px;
         font-size: 1.2em;
+        transition: color 0.3s ease;
       }
 
       main {
@@ -67,7 +69,11 @@
         margin-bottom: 40px;
       }
 
+      /* Scroll-triggered reveal for project cards */
       .project-card {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
         background-color: #1a1a1a;
         border-radius: 10px;
         margin: 20px auto;
@@ -75,6 +81,16 @@
         max-width: 800px;
         text-align: left;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+      .project-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hover effect on project cards */
+      .project-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.6);
       }
 
       .project-card h3 {
@@ -84,6 +100,17 @@
 
       .project-card p {
         line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .project-card a {
+        color: #00ffff;
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      .project-card a:hover {
+        color: #66ffff;
       }
 
       .project-card img {
@@ -113,8 +140,8 @@
       footer nav ul li a {
         text-decoration: none;
         color: #FFFFFF;
+        transition: color 0.3s ease;
       }
-
       footer nav ul li a:hover {
         color: #007BFF;
       }
@@ -129,8 +156,26 @@
         text-decoration: none;
         margin: 0 5px;
         font-size: 1.2em;
+        transition: color 0.3s ease;
+      }
+      footer .social-icons a:hover {
+        color: #007BFF;
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll('.project-card');
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        cards.forEach(card => observer.observe(card));
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -143,8 +188,8 @@
         </ul>
         <h1>Annora Zhu Portfolio</h1>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/annora-zhu-1355352b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">📘</a>
-          <a href="https://www.instagram.com/zz_annora?igsh=Z25raTdkdGxoYXlj&utm_source=qr" target="_blank">📸</a>
+          <a href="https://www.linkedin.com/in/annora-zhu-1355352b9" target="_blank">📘</a>
+          <a href="https://www.instagram.com/zz_annora" target="_blank">📸</a>
           <a href="mailto:y65zhu@uwaterloo.ca">✉️</a>
         </div>
       </nav>
@@ -155,131 +200,90 @@
 
       <div class="project-card">
         <h3>✨ Excel Gum Rebrand</h3>
-        <p>
-          For this project made with my partner Sofia Xu, we gave Excel Gum a bold glow-up version for Gen Z’s. To let Excel adapt to their fast-paced, style-savvy personality. Inspired by the crisp blast of a fresh chew, we kept the iconic icy-blue vibe but leveled it up with a sleeker, more modern visual identity.
-        </p>
-        <a href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:8dc182b8-286a-5a15-840b-fe08ccf0c6c2?invite=true&accept=true&promoid=Z2G1FQKR&mv=other" target="_blank" style="color:#00ffff; font-weight:bold;">Check out the full presentation</a>
+        <p>For this project made with my partner Sofia Xu, we gave Excel Gum a bold glow-up version for Gen Z’s. To let Excel adapt to their fast-paced, style-savvy personality. Inspired by the crisp blast of a fresh chew, we kept the iconic icy-blue vibe but leveled it up with a sleeker, more modern visual identity.</p>
+        <a href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:8dc182b8-286a-5a15-840b-fe08ccf0c6c2?invite=true&accept=true&promoid=Z2G1FQKR&mv=other" target="_blank">Check out the full presentation</a>
         <img src="mockup-set02.png" alt="Excel Gum mockup">
-
         <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:100%; border-radius:10px; margin-top:20px;">
           <iframe src="https://www.youtube.com/embed/6c8f2D7rC6c" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
         </div>
-
-        <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
-          <iframe src="https://www.instagram.com/reel/DHCz4vQtCEI/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex: 1 1 48%; border-radius: 10px;"></iframe>
-          <iframe src="https://www.instagram.com/reel/DHC2AvXNkFn/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex: 1 1 48%; border-radius: 10px;"></iframe>
+        <div style="display:flex; gap:20px; margin-top:20px; flex-wrap:wrap;">
+          <iframe src="https://www.instagram.com/reel/DHCz4vQtCEI/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex:1 1 48%; border-radius:10px;"></iframe>
+          <iframe src="https://www.instagram.com/reel/DHC2AvXNkFn/embed" width="100%" height="600" frameborder="0" allowfullscreen style="flex:1 1 48%; border-radius:10px;"></iframe>
         </div>
-
-        <p>
-          Stronger flavor cues and greater contrast are features of our redesigned package, and Excel became more than just gum thanks to the #FreshAF social promotion. We made remaining fresh feel like a flex with streetwear collaborations, AR filters, and Instagram challenges.
-        </p>
+        <p>Stronger flavor cues and greater contrast are features of our redesigned package, and Excel became more than just gum thanks to the #FreshAF social promotion. We made remaining fresh feel like a flex with streetwear collaborations, AR filters, and Instagram challenges.</p>
       </div>
 
       <div class="project-card">
         <h3>📱 CAN Talk App Design</h3>
-        <p>
-          Our app is designed to help newcomers adapt to Canadian English through a user-friendly, interactive experience. With features like pronunciation practice, a guessing game for idiomatic expressions, and an AI chatbot, users can gradually improve their conversational fluency, accent, and understanding of Canadian culture.
+        <p>Our app is designed to help newcomers adapt to Canadian English through a user-friendly, interactive experience. With features like pronunciation practice, a guessing game for idiomatic expressions, and an AI chatbot, users can gradually improve their conversational fluency, accent, and understanding of Canadian culture.</p>
+        <p>👉 <a href="https://www.canva.com/design/DAGXXaes4Gg/nUxMYfspzq5fPLuXsVMQZg/view?utm_content=DAGXXaes4Gg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8078bdb6f0" target="_blank">View Presentation on Canva</a>
         </p>
-
-        <p>
-          👉 <a href="https://www.canva.com/design/DAGXXaes4Gg/nUxMYfspzq5fPLuXsVMQZg/view?utm_content=DAGXXaes4Gg&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h8078bdb6f0" target="_blank" style="color:#00ffff; font-weight:bold;">View Presentation on Canva</a>
-        </p>
-
-        <p>
-          🎨 <a href="https://www.figma.com/proto/dIOZMxhIneCquwTWyfRGYf/Wu_Nicole_M3Figma?node-id=6-413&starting-point-node-id=6%3A413&t=BmBju4itB9U8lihN-1" target="_blank" style="color:#00ffff; font-weight:bold;">Explore the Figma Prototype</a>
-        </p>
-
-        <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
-          <img src="1.png" alt="Wireframe Set 1" style="width: 48%; border-radius: 10px;">
-          <img src="2.png" alt="Wireframe Set 2" style="width: 48%; border-radius: 10px;">
+        <p>🎨 <a href="https://www.figma.com/proto/dIOZMxhIneCquwTWyfRGYf/Wu_Nicole_M3Figma?node-id=6-413&starting-point-node-id=6%3A413&t=BmBju4itB9U8lihN-1" target="_blank">Explore the Figma Prototype</a></p>
+        <div style="margin-top:20px; display:flex; gap:20px; flex-wrap:wrap;">
+          <img src="1.png" alt="Wireframe Set 1" style="width:48%; border-radius:10px;">
+          <img src="2.png" alt="Wireframe Set 2" style="width:48%; border-radius:10px;">
         </div>
-
-        <div style="margin-top: 20px;">
-          <img src="3.png" alt="Full Screen Flow" style="width: 100%; border-radius: 10px;">
+        <div style="margin-top:20px;
+          ">
+          <img src="3.png" alt="Full Screen Flow" style="width:100%; border-radius:10px;">
         </div>
-
-        <div style="margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
-          <img src="use1.png" alt="Storyboard: Preparing for Interview" style="width: 48%; border-radius: 10px;">
-          <img src="use2.png" alt="Storyboard: Doing the Lessons" style="width: 48%; border-radius: 10px;">
+        <div style="margin-top:20px; display:flex; gap:20px; flex-wrap:wrap;">
+          <img src="use1.png" alt="Storyboard: Preparing for Interview" style="width:48%; border-radius:10px;">
+          <img src="use2.png" alt="Storyboard: Doing the Lessons" style="width:48%; border-radius:10px;">
         </div>
       </div>
 
       <div class="project-card">
         <h3>🎧 Audio Documentary</h3>
-        <p>
-          The documentary focuses on Jane's life as a night shift janitor at the school. She has been part of the maintenance team for years and shares her work experience cleaning part of our Waterloo campus school buildings.
-        </p>
-        <p>
-          She reflects on the happiness and loneliness of her job, and also expresses her satisfaction with contributing to the educational setting.
-        </p>
-
-        <audio controls style="width: 100%; margin-top: 15px; border-radius: 10px;">
+        <p>The documentary focuses on Jane's life as a night shift janitor at the school. She has been part of the maintenance team for years and shares her work experience cleaning part of our Waterloo campus school buildings.</p>
+        <p>She reflects on the happiness and loneliness of her job, and also expresses her satisfaction with contributing to the educational setting.</p>
+        <audio controls style="width:100%; margin-top:15px; border-radius:10px;">
           <source src="Zhu_PRJ3_FINAL.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
         </audio>
+      </div>
 
-        <div class="project-card">
-          <h3>⌛ Antiques in Time Documentary</h3>
-          <p>
-            “Antiques in Time” is a documentary that explores in depth the life of John Shantz, proprietor of a small but refined watch restoration business in Stratford, Ontario. Established in 1977, the company has been a mechanical watch haven, protecting not only the fine artistry of mechanical clocks and watches, but also the history attached to them.
-          </p>
-          <p>
-            Through interviews with John and his customers, the documentary delves into the significance of mechanical timepieces in today's digital age—touching on themes of tradition, preservation, and the emotional connection people form with these intricate machines from the past.
-          </p>
+      <div class="project-card">
+        <h3>⌛ Antiques in Time Documentary</h3>
+        <p>“Antiques in Time” is a documentary that explores in depth the life of John Shantz, proprietor of a small but refined watch restoration business in Stratford, Ontario. Established in 1977, the company has been a mechanical watch haven, protecting not only the fine artistry of mechanical clocks and watches, but also the history attached to them.</p>
+        <p>Through interviews with John and his customers, the documentary delves into the significance of mechanical timepieces in today's digital age—touching on themes of tradition, preservation, and the emotional connection people form with these intricate machines from the past.</p>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:100%; border-radius:10px; margin-top:20px;">
+          <iframe src="https://www.youtube.com/embed/KOckxR6iWkQ" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
 
-          <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; max-width:100%; border-radius:10px; margin-top:20px;">
-            <iframe src="https://www.youtube.com/embed/KOckxR6iWkQ" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+      <div class="project-card">
+        <h3>🕯️ Best Story Ever – Finding Light in Darkness</h3>
+        <p>This project is a personal sketch comic. It visualizes an emotional and transformative moment from my life. Through hand-drawn panels and expressive layout design, it tells the story of my first visit to a church during a time of heartbreak and emotional exhaustion. The narrative captures the experience of witnessing a woman’s seizure during the sermon, which challenged my understanding of faith, healing, and inner strength.</p>
+        <p>📄 <a href="Annora%20Zhu_BSE-compressed.pdf" target="_blank">View Project PDF</a></p>
+        <div style="overflow-x:auto; white-space: nowrap; padding-top:20px;">
+          <img src="Screenshot 2025-04-15 at 18.24.44.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.25.19.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.25.37.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.25.57.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.26.18.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.26.38.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.27.03.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.27.25.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.27.45.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.28.07.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+          <img src="Screenshot 2025-04-15 at 18.28.27.png" alt="" style="height:500px; margin-right:20px; border-radius:10px; display:inline-block;">
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>🎮 CS Final Project – My Little House & Harvest Heaven</h3>
+        <p>These two interactive games, <strong>"My Little House"</strong> and <strong>"Harvest Heaven"</strong>, were created using JavaScript and p5.js as part of my final project for CS 105 and CS 106. Both games reflect my growing skills in game design, programming logic, and interactivity.</p>
+        <p><em>"My Little House"</em> simulates everyday household tasks in an interactive environment. Players can explore rooms, switch lights on and off, play a mini-game, check the weather forecast, and more—all from inside a cozy digital home.</p>
+        <div style="flex:1 1 48%; position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px; margin-top:20px;">
+          <iframe src="https://www.youtube.com/embed/OHXPihCHsfo" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+        </div>
+        <p><em>"Harvest Heaven"</em> is a collaborative farming simulation game where players plant, grow, and harvest crops to earn coins and level up. The game also features fun mini-games that give players bonus rewards. My teammate and I divided the workload evenly and collaborated closely to bring the full experience to life.</p>
+        <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:20px;">
+          <div style="flex:1 1 48%; position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:10px;">
+            <iframe src="https://www.youtube.com/embed/3ltd3IDpo70" frameborder="0" allowfullscreen style="position:absolute; top:0; left:0; width:100%%; height:100%;"></iframe>
           </div>
         </div>
-
-        <div class="project-card">
-          <h3>🕯️ Best Story Ever – Finding Light in Darkness</h3>
-          <p>
-            This project is a personal sketch comic. It visualizes an emotional and transformative moment from my life. Through hand-drawn panels and expressive layout design, it tells the story of my first visit to a church during a time of heartbreak and emotional exhaustion. The narrative captures the experience of witnessing a woman’s seizure during the sermon, which challenged my understanding of faith, healing, and inner strength.
-          </p>
-          <p>
-            📄 <a href="Annora%20Zhu_BSE-compressed.pdf" target="_blank" style="color:#00ffff; font-weight:bold;">View Project PDF</a>
-          </p>
-
-          <div style="overflow-x: auto; white-space: nowrap; padding-top: 20px;">
-            <img src="Screenshot 2025-04-15 at 18.24.44.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.25.19.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.25.37.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.25.57.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.26.18.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.26.38.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.27.03.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.27.25.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.27.45.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.28.07.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-            <img src="Screenshot 2025-04-15 at 18.28.27.png" alt="" style="height: 500px; margin-right: 20px; border-radius: 10px; display: inline-block;">
-          </div>
-        </div>
-        <div class="project-card">
-          <h3>🎮 CS Final Project – My Little House & Harvest Heaven</h3>
-          <p>
-            These two interactive games, <strong>"My Little House"</strong> and <strong>"Harvest Heaven"</strong>, were created using JavaScript and p5.js as part of my final project for CS 105 and CS 106. Both games reflect my growing skills in game design, programming logic, and interactivity.
-          </p>
-          <p>
-            <em>"My Little House"</em> simulates everyday household tasks in an interactive environment. Players can explore rooms, switch lights on and off, play a mini-game, check the weather forecast, and more—all from inside a cozy digital home.
-          </p>
-          <div style="flex: 1 1 48%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-            <iframe src="https://www.youtube.com/embed/OHXPihCHsfo" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-            </iframe>
-          </div>
-          <p>
-            <em>"Harvest Heaven"</em> is a collaborative farming simulation game where players plant, grow, and harvest crops to earn coins and level up. The game also features fun mini-games that give players bonus rewards. My teammate and I divided the workload evenly and collaborated closely to bring the full experience to life.
-          </p>
-
-          <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
-
-            <div style="flex: 1 1 48%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
-              <iframe src="https://www.youtube.com/embed/3ltd3IDpo70" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-              </iframe>
-            </div>
-          </div>
-        </div>
-
       </div>
     </main>
 
@@ -292,11 +296,3 @@
         </ul>
       </nav>
       <p>Hand-coded by Annora Zhu</p>
-      <div class="social-icons">
-        <a href="https://www.linkedin.com/in/annora-zhu-1355352b9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">📘</a>
-        <a href="https://www.instagram.com/zz_annora?igsh=Z25raTdkdGxoYXlj&utm_source=qr" target="_blank">📸</a>
-        <a href="mailto:y65zhu@uwaterloo.ca">✉️</a>
-      </div>
-    </footer>
-  </body>
-</html>
