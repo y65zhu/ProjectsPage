@@ -238,7 +238,7 @@
       }
       .project-card:hover::before { transform: translateX(0); }
 
-      /* Card Header (collapsible trigger) */
+      /* Card Header */
       .card-header {
         display: grid;
         grid-template-columns: 80px 1fr auto;
@@ -260,7 +260,6 @@
       }
       .project-card:hover .card-num { color: rgba(201,168,76,0.5); }
 
-      .card-title-wrap {}
       .card-category {
         font-size: 0.56rem;
         letter-spacing: 0.25em;
@@ -292,7 +291,7 @@
         overflow: hidden;
         transition: max-height 0.6s ease;
       }
-      .project-card.open .card-body { max-height: 4000px; }
+      .project-card.open .card-body { max-height: 6000px; }
 
       .card-inner {
         padding: 0 48px 48px;
@@ -307,7 +306,6 @@
         margin: 28px 0;
         max-width: 800px;
       }
-      .card-desc + .card-desc { margin-top: -10px; }
 
       .card-links {
         display: flex;
@@ -333,16 +331,10 @@
         border-color: var(--gold);
       }
 
-      /* Media grids */
+      /* Media */
       .media-grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-top: 24px;
-      }
-      .media-grid-3 {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
         gap: 16px;
         margin-top: 24px;
       }
@@ -356,15 +348,11 @@
       }
       .media-frame video,
       .media-frame img,
-      .media-frame audio {
-        width: 100%;
-        display: block;
-      }
-      .media-frame iframe {
-        width: 100%;
-        display: block;
-        border: none;
-      }
+      .media-frame audio { width: 100%; display: block; }
+      .media-frame iframe { width: 100%; display: block; border: none; }
+
+      /* Fixed tall aspect for TryOn to show full content */
+      .aspect-tall { aspect-ratio: 9/14; }
       .aspect-16-9 { aspect-ratio: 16/9; }
       .aspect-9-16 { aspect-ratio: 9/16; }
       .media-frame img { object-fit: cover; }
@@ -411,13 +399,8 @@
         gap: 24px;
         background: #080808;
       }
-      .audio-icon {
-        font-size: 2rem;
-        color: var(--gold);
-      }
-      .audio-info {
-        flex: 1;
-      }
+      .audio-icon { font-size: 2rem; color: var(--gold); }
+      .audio-info { flex: 1; }
       .audio-title {
         font-family: 'Cormorant Garamond', serif;
         font-size: 1rem;
@@ -433,6 +416,20 @@
       .audio-wrap audio {
         flex: 2;
         filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg);
+      }
+
+      /* AI Brochure PDF embed */
+      .pdf-frame {
+        margin-top: 24px;
+        border: 1px solid var(--border);
+        background: #080808;
+        position: relative;
+      }
+      .pdf-frame iframe {
+        width: 100%;
+        height: 700px;
+        display: block;
+        border: none;
       }
 
       /* ── FOOTER ── */
@@ -451,12 +448,7 @@
         color: var(--paper);
       }
       .footer-name em { font-style: italic; color: var(--gold); }
-      .footer-nav ul {
-        list-style: none;
-        display: flex;
-        gap: 28px;
-        justify-content: center;
-      }
+      .footer-nav ul { list-style: none; display: flex; gap: 28px; justify-content: center; }
       .footer-nav ul li a {
         font-size: 0.6rem;
         letter-spacing: 0.2em;
@@ -466,12 +458,7 @@
         transition: color 0.3s;
       }
       .footer-nav ul li a:hover { color: var(--gold); }
-      .footer-right {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 12px;
-      }
+      .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
       .footer-socials { display: flex; gap: 16px; }
       .footer-socials a {
         font-size: 0.6rem;
@@ -539,7 +526,7 @@
       <p class="page-hero-tag">Selected Work · 2022–2025</p>
       <h1>My <em>Projects</em></h1>
       <p class="page-hero-sub">Design · Photography · Film · Code · Experience</p>
-      <div class="project-count">07</div>
+      <div class="project-count">08</div>
     </div>
 
     <!-- MARQUEE -->
@@ -550,14 +537,16 @@
         <span>CAN Talk App</span><span class="accent">✦</span>
         <span>Audio Documentary</span><span class="accent">✦</span>
         <span>Antiques in Time</span><span class="accent">✦</span>
-        <span>Best Story Ever</span><span class="accent">✦</span>
+        <span>AI Brochure</span><span class="accent">✦</span>
+        <span>Before I Forget</span><span class="accent">✦</span>
         <span>CS Games</span><span class="accent">✦</span>
         <span>TryOn Buddy</span><span class="accent">✦</span>
         <span>Excel Rebrand</span><span class="accent">✦</span>
         <span>CAN Talk App</span><span class="accent">✦</span>
         <span>Audio Documentary</span><span class="accent">✦</span>
         <span>Antiques in Time</span><span class="accent">✦</span>
-        <span>Best Story Ever</span><span class="accent">✦</span>
+        <span>AI Brochure</span><span class="accent">✦</span>
+        <span>Before I Forget</span><span class="accent">✦</span>
         <span>CS Games</span><span class="accent">✦</span>
       </div>
     </div>
@@ -565,7 +554,7 @@
     <main>
       <div class="section-label reveal">Projects</div>
 
-      <!-- 01: TryOn Buddy -->
+      <!-- ── 01: TryOn Buddy ── -->
       <div class="project-card" data-index="0">
         <div class="card-header">
           <div class="card-num">01</div>
@@ -578,18 +567,23 @@
         <div class="card-body">
           <div class="card-inner">
             <p class="card-desc">An independently developed smart virtual try-on application designed to personalize the online shopping experience. The prototype enables users to upload their own photos, search for specific brands (such as Lululemon), and instantly preview how different styles and color options look on them. Features an AI-powered Color Analysis engine delivering compatibility scores and tailored style insights.</p>
+            <!-- Taller aspect ratio so full content is visible -->
             <div class="media-grid-2">
               <div>
-                <div class="media-frame aspect-16-9">
-                  <video controls autoplay muted loop playsinline>
+                <div class="media-frame aspect-tall">
+                  <video controls autoplay muted loop playsinline style="height:100%; object-fit:contain; background:#000;">
                     <source src="walkover.mov" type="video/mp4">
                   </video>
                 </div>
                 <div class="media-label">App Walkthrough · Video</div>
               </div>
               <div>
-                <div class="media-frame aspect-16-9">
-                  <iframe height="100%" src="https://embed.figma.com/proto/t6qE7RMo78vmX3G9i8gidM/TryOn-Buddy?node-id=106-2047&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share" allowfullscreen></iframe>
+                <div class="media-frame aspect-tall">
+                  <iframe
+                    src="https://embed.figma.com/proto/t6qE7RMo78vmX3G9i8gidM/TryOn-Buddy?node-id=106-2047&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share"
+                    allowfullscreen
+                    style="height:100%;">
+                  </iframe>
                 </div>
                 <div class="media-label">Figma Prototype · Interactive</div>
               </div>
@@ -598,7 +592,7 @@
         </div>
       </div>
 
-      <!-- 02: Excel Gum -->
+      <!-- ── 02: Excel Gum ── -->
       <div class="project-card" data-index="1">
         <div class="card-header">
           <div class="card-num">02</div>
@@ -648,7 +642,7 @@
         </div>
       </div>
 
-      <!-- 03: CAN Talk -->
+      <!-- ── 03: CAN Talk ── -->
       <div class="project-card" data-index="2">
         <div class="card-header">
           <div class="card-num">03</div>
@@ -693,7 +687,7 @@
         </div>
       </div>
 
-      <!-- 04: Audio Documentary -->
+      <!-- ── 04: Audio Documentary ── -->
       <div class="project-card" data-index="3">
         <div class="card-header">
           <div class="card-num">04</div>
@@ -720,7 +714,7 @@
         </div>
       </div>
 
-      <!-- 05: Antiques in Time -->
+      <!-- ── 05: Antiques in Time ── -->
       <div class="project-card" data-index="4">
         <div class="card-header">
           <div class="card-num">05</div>
@@ -743,60 +737,78 @@
         </div>
       </div>
 
-      <!-- 06: Best Story Ever -->
+      <!-- ── 06: AI Intelligence Brochure (replaces Best Story Ever) ── -->
       <div class="project-card" data-index="5">
         <div class="card-header">
           <div class="card-num">06</div>
           <div class="card-title-wrap">
-            <div class="card-category">Illustration · Narrative · Graphic Novel</div>
-            <h3 class="card-title">Best Story Ever – Finding Light in Darkness</h3>
+            <div class="card-category">Print Design · InDesign · WatSPEED</div>
+            <h3 class="card-title">Artificial Intelligence Certificate — Program Brochure</h3>
           </div>
           <div class="card-toggle">+</div>
         </div>
         <div class="card-body">
           <div class="card-inner">
-            <p class="card-desc">A personal sketch comic visualizing an emotional and transformative moment. Through hand-drawn panels and expressive layout design, it tells the story of a first visit to a church during heartbreak and emotional exhaustion — witnessing a woman's seizure during the sermon, and how that challenged understanding of faith, healing, and inner strength.</p>
+            <p class="card-desc">Designed a professional program brochure for WatSPEED's Artificial Intelligence Certificate at the University of Waterloo using Adobe InDesign. The brochure communicates the program's value proposition, course structure, learning outcomes, and key takeaways across eight pages — balancing typographic clarity with bold visual hierarchy to attract prospective learners.</p>
             <div class="card-links">
-              <a class="card-link" href="Annora%20Zhu_BSE-compressed.pdf" target="_blank">View Full PDF →</a>
+              <a class="card-link" href="Ai_certificate.pdf" target="_blank">View Full Brochure PDF →</a>
             </div>
-            <div class="scroll-strip">
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.24.44.png" alt="Panel 1"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.25.19.png" alt="Panel 2"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.25.37.png" alt="Panel 3"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.25.57.png" alt="Panel 4"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.26.18.png" alt="Panel 5"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.26.38.png" alt="Panel 6"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.27.03.png" alt="Panel 7"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.27.25.png" alt="Panel 8"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.27.45.png" alt="Panel 9"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.28.07.png" alt="Panel 10"></div>
-              <div class="media-frame"><img src="Screenshot 2025-04-15 at 18.28.27.png" alt="Panel 11"></div>
-            </div>
-            <div class="media-label" style="margin-top:12px;">← Scroll to view all panels</div>
+           
+            <div class="media-label" style="margin-top:10px;">Adobe InDesign · University of Waterloo WatSPEED · 2025</div>
           </div>
         </div>
       </div>
 
-      <!-- 07: CS Games -->
+      <!-- ── 07: Before I Forget (NEW) ── -->
       <div class="project-card" data-index="6">
         <div class="card-header">
           <div class="card-num">07</div>
           <div class="card-title-wrap">
-            <div class="card-category">Game Design · JavaScript · p5.js</div>
-            <h3 class="card-title">My Little House & Harvest Heaven</h3>
+            <div class="card-category">Interaction Design · JavaScript · p5.js · Figma</div>
+            <h3 class="card-title">Before I Forget — Interactive Narrative Game</h3>
           </div>
           <div class="card-toggle">+</div>
         </div>
         <div class="card-body">
           <div class="card-inner">
-            <p class="card-desc"><em style="color:var(--paper); font-style:normal; font-family:'Cormorant Garamond',serif;">My Little House</em> — A household simulation where players explore rooms, switch lights, play mini-games, check weather forecasts, and more from inside a cozy digital home. Built with JavaScript and p5.js for CS 105.</p>
+            <p class="card-desc">An interactive narrative game simulating cognitive decline through evolving environments and UI changes. Built using JavaScript (p5.js), HTML/CSS, Figma, Adobe tools, Gemini, and Git. Designed gameplay systems and interface elements to guide user interaction and reflect emotional experience — as the player progresses, the interface itself begins to fragment, distort, and fade, mirroring the protagonist's deteriorating memory.</p>
+            <div class="card-links">
+              <a class="card-link" href="https://qhtan1.github.io/A2_Group9B_MidTermGame/" target="_blank">Play the Game →</a>
+            </div>
+            <div class="media-full">
+              <div class="media-frame aspect-16-9">
+                <iframe
+                  src="https://qhtan1.github.io/A2_Group9B_MidTermGame/"
+                  title="Before I Forget – Interactive Game"
+                  allowfullscreen>
+                </iframe>
+              </div>
+              <div class="media-label">Before I Forget · Live Playable Demo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── 08: CS Games ── -->
+      <div class="project-card" data-index="7">
+        <div class="card-header">
+          <div class="card-num">08</div>
+          <div class="card-title-wrap">
+            <div class="card-category">Game Design · JavaScript · p5.js</div>
+            <h3 class="card-title">My Little House &amp; Harvest Heaven</h3>
+          </div>
+          <div class="card-toggle">+</div>
+        </div>
+        <div class="card-body">
+          <div class="card-inner">
+            <p class="card-desc"><span style="font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--paper);">My Little House</span> — A household simulation where players explore rooms, switch lights, play mini-games, check weather forecasts, and more from inside a cozy digital home. Built with JavaScript and p5.js for CS 105.</p>
             <div class="media-full">
               <div class="media-frame aspect-16-9">
                 <iframe src="https://www.youtube.com/embed/OHXPihCHsfo" allowfullscreen></iframe>
               </div>
               <div class="media-label">My Little House · Gameplay Demo</div>
             </div>
-            <p class="card-desc" style="margin-top:28px;"><em style="color:var(--paper); font-style:normal; font-family:'Cormorant Garamond',serif;">Harvest Heaven</em> — A collaborative farming simulation where players plant, grow, and harvest crops to earn coins and level up, featuring bonus mini-games. Built with a teammate for CS 106.</p>
+            <p class="card-desc" style="margin-top:28px;"><span style="font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--paper);">Harvest Heaven</span> — A collaborative farming simulation where players plant, grow, and harvest crops to earn coins and level up, featuring bonus mini-games. Built with a teammate for CS 106.</p>
             <div class="media-full">
               <div class="media-frame aspect-16-9">
                 <iframe src="https://www.youtube.com/embed/3ltd3IDpo70" allowfullscreen></iframe>
@@ -836,36 +848,29 @@
       const ring = document.getElementById('cursorRing');
       document.addEventListener('mousemove', e => {
         cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        ring.style.left = e.clientX + 'px';
-        ring.style.top = e.clientY + 'px';
+        cursor.style.top  = e.clientY + 'px';
+        ring.style.left   = e.clientX + 'px';
+        ring.style.top    = e.clientY + 'px';
       });
       document.querySelectorAll('a, .card-header').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          ring.style.width = '56px'; ring.style.height = '56px'; ring.style.opacity = '1';
-        });
-        el.addEventListener('mouseleave', () => {
-          ring.style.width = '36px'; ring.style.height = '36px'; ring.style.opacity = '0.6';
-        });
+        el.addEventListener('mouseenter', () => { ring.style.width='56px'; ring.style.height='56px'; ring.style.opacity='1'; });
+        el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.6'; });
       });
 
       // Header scroll
       const header = document.getElementById('header');
-      window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 40);
-      });
+      window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
 
-      // Scroll reveal
-      const reveals = document.querySelectorAll('.reveal');
+      // Section label reveal
       const revealObs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
       }, { threshold: 0.1 });
-      reveals.forEach(el => revealObs.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-      // Project card accordion + scroll reveal
+      // Project card scroll reveal + accordion
       const cards = document.querySelectorAll('.project-card');
       const cardObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach((entry, i) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             setTimeout(() => entry.target.classList.add('visible'), 80);
             obs.unobserve(entry.target);
@@ -873,7 +878,7 @@
         });
       }, { threshold: 0.08 });
 
-      cards.forEach((card, i) => {
+      cards.forEach(card => {
         cardObs.observe(card);
         card.querySelector('.card-header').addEventListener('click', () => {
           const isOpen = card.classList.contains('open');
