@@ -6,217 +6,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
       :root {
-        --ink: #0a0a0a;
-        --paper: #f5f0e8;
-        --cream: #ede8da;
-        --gold: #c9a84c;
-        --gold-light: #e8cc80;
-        --rust: #b85c38;
-        --sage: #6b8c7a;
-        --text-muted: #888070;
-        --border: rgba(201,168,76,0.25);
+        --ink: #0a0a0a; --paper: #f5f0e8; --cream: #ede8da; --gold: #c9a84c;
+        --gold-light: #e8cc80; --rust: #b85c38; --sage: #6b8c7a;
+        --text-muted: #888070; --border: rgba(201,168,76,0.25);
       }
-
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       html { scroll-behavior: smooth; }
+      body { font-family: 'DM Mono', monospace; background: var(--ink); color: var(--paper); overflow-x: hidden; cursor: none; }
 
-      body {
-        font-family: 'DM Mono', monospace;
-        background: var(--ink);
-        color: var(--paper);
-        overflow-x: hidden;
-        cursor: none;
-      }
+      .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s; }
+      .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: all 0.2s ease; opacity: 0.6; }
 
-      /* Cursor */
-      .cursor {
-        position: fixed;
-        width: 8px; height: 8px;
-        background: var(--gold);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition: transform 0.1s;
-      }
-      .cursor-ring {
-        position: fixed;
-        width: 36px; height: 36px;
-        border: 1px solid var(--gold);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
-        transform: translate(-50%, -50%);
-        transition: all 0.2s ease;
-        opacity: 0.6;
-      }
+      body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9990; opacity: 0.4; }
 
-      /* Noise */
-      body::before {
-        content: '';
-        position: fixed; inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-        pointer-events: none;
-        z-index: 9990;
-        opacity: 0.4;
-      }
-
-      /* ── HEADER ── */
-      header {
-        position: fixed;
-        top: 0; left: 0; right: 0;
-        z-index: 100;
-        padding: 20px 48px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.4s, background 0.4s;
-      }
-      header.scrolled {
-        background: rgba(10,10,10,0.85);
-        backdrop-filter: blur(12px);
-        border-color: var(--border);
-      }
-      .nav-logo {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.1rem;
-        font-weight: 300;
-        letter-spacing: 0.3em;
-        color: var(--paper);
-        text-transform: uppercase;
-        text-decoration: none;
-      }
+      header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 48px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid transparent; transition: border-color 0.4s, background 0.4s; }
+      header.scrolled { background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); border-color: var(--border); }
+      .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.3em; color: var(--paper); text-transform: uppercase; text-decoration: none; }
       .nav-logo span { color: var(--gold); }
       nav ul { list-style: none; display: flex; gap: 36px; }
-      nav ul li a {
-        font-size: 0.62rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        text-decoration: none;
-        position: relative;
-        transition: color 0.3s;
-      }
-      nav ul li a::after {
-        content: '';
-        position: absolute;
-        bottom: -3px; left: 0;
-        width: 0; height: 1px;
-        background: var(--gold);
-        transition: width 0.3s ease;
-      }
+      nav ul li a { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; position: relative; transition: color 0.3s; }
+      nav ul li a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
       nav ul li a:hover, nav ul li a.active { color: var(--gold); }
       nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
       .nav-socials { display: flex; gap: 16px; }
-      .nav-socials a {
-        font-size: 0.7rem;
-        color: var(--text-muted);
-        text-decoration: none;
-        letter-spacing: 0.1em;
-        transition: color 0.3s;
-      }
+      .nav-socials a { font-size: 0.7rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
       .nav-socials a:hover { color: var(--gold); }
 
-      /* ── PAGE HERO ── */
-      .page-hero {
-        padding: 160px 80px 80px;
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid var(--border);
-      }
-      .page-hero::before {
-        content: '';
-        position: absolute; inset: 0;
-        background-image:
-          linear-gradient(var(--border) 1px, transparent 1px),
-          linear-gradient(90deg, var(--border) 1px, transparent 1px);
-        background-size: 80px 80px;
-        pointer-events: none;
-      }
-      .page-hero-tag {
-        font-size: 0.62rem;
-        letter-spacing: 0.3em;
-        color: var(--gold);
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        opacity: 0;
-        animation: fadeUp 0.8s ease forwards 0.3s;
-      }
-      .page-hero h1 {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: clamp(4rem, 8vw, 8rem);
-        font-weight: 300;
-        line-height: 0.9;
-        color: var(--paper);
-        opacity: 0;
-        animation: fadeUp 1s ease forwards 0.5s;
-      }
+      .page-hero { padding: 160px 80px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+      .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
+      .page-hero-tag { font-size: 0.62rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s; }
+      .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 8vw, 8rem); font-weight: 300; line-height: 0.9; color: var(--paper); opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
       .page-hero h1 em { font-style: italic; color: var(--gold); }
-      .page-hero-sub {
-        margin-top: 28px;
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        opacity: 0;
-        animation: fadeUp 0.8s ease forwards 0.8s;
-      }
-      .project-count {
-        position: absolute;
-        bottom: 40px; right: 80px;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 5rem;
-        font-weight: 300;
-        color: rgba(201,168,76,0.08);
-        line-height: 1;
-        opacity: 0;
-        animation: fadeIn 1s ease forwards 1s;
-      }
+      .page-hero-sub { margin-top: 28px; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+      .project-count { position: absolute; bottom: 40px; right: 80px; font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: rgba(201,168,76,0.08); line-height: 1; opacity: 0; animation: fadeIn 1s ease forwards 1s; }
 
-      /* ── MARQUEE ── */
-      .marquee-bar {
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        background: var(--ink);
-        overflow: hidden;
-        padding: 14px 0;
-        white-space: nowrap;
-      }
-      .marquee-inner {
-        display: inline-flex;
-        animation: marquee 26s linear infinite;
-      }
-      .marquee-inner span {
-        font-size: 0.6rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        padding: 0 40px;
-      }
+      .marquee-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--ink); overflow: hidden; padding: 14px 0; white-space: nowrap; }
+      .marquee-inner { display: inline-flex; animation: marquee 26s linear infinite; }
+      .marquee-inner span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); padding: 0 40px; }
       .marquee-inner span.accent { color: var(--gold); }
 
-      /* ── PROJECT CARDS ── */
       main { padding: 0 80px 100px; }
 
-      .section-label {
-        font-size: 0.58rem;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin: 80px 0 50px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
-      }
-      .section-label::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: var(--border);
-      }
+      .section-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin: 80px 0 50px; display: flex; align-items: center; gap: 20px; }
+      .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
+      /* Scroll-to anchor offset — so the fixed header doesn't cover the card */
       .project-card {
+        scroll-margin-top: 100px;
         opacity: 0;
         transform: translateY(30px);
         transition: opacity 0.8s ease, transform 0.8s ease;
@@ -227,274 +63,76 @@
         position: relative;
       }
       .project-card.visible { opacity: 1; transform: none; }
-      .project-card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.6s ease;
-      }
+      .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); transform: translateX(-100%); transition: transform 0.6s ease; }
       .project-card:hover::before { transform: translateX(0); }
 
-      /* Card Header */
-      .card-header {
-        display: grid;
-        grid-template-columns: 80px 1fr auto;
-        align-items: center;
-        gap: 32px;
-        padding: 36px 48px;
-        cursor: none;
-        transition: background 0.3s;
-      }
+      /* Highlight the card when jumped to via anchor */
+      .project-card:target { border-color: var(--gold); }
+      .project-card:target::before { transform: translateX(0); }
+
+      .card-header { display: grid; grid-template-columns: 80px 1fr auto; align-items: center; gap: 32px; padding: 36px 48px; cursor: none; transition: background 0.3s; }
       .project-card:hover .card-header { background: rgba(201,168,76,0.04); }
-
-      .card-num {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 2.5rem;
-        font-weight: 300;
-        color: rgba(201,168,76,0.2);
-        line-height: 1;
-        transition: color 0.3s;
-      }
+      .card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(201,168,76,0.2); line-height: 1; transition: color 0.3s; }
       .project-card:hover .card-num { color: rgba(201,168,76,0.5); }
-
-      .card-category {
-        font-size: 0.56rem;
-        letter-spacing: 0.25em;
-        text-transform: uppercase;
-        color: var(--gold);
-        margin-bottom: 8px;
-      }
-      .card-title {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.8rem;
-        font-weight: 300;
-        color: var(--paper);
-        line-height: 1.1;
-      }
-
-      .card-toggle {
-        font-size: 1.4rem;
-        color: var(--gold);
-        transition: transform 0.4s ease;
-        user-select: none;
-        font-family: 'DM Mono', monospace;
-        font-weight: 300;
-      }
+      .card-category { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+      .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--paper); line-height: 1.1; }
+      .card-toggle { font-size: 1.4rem; color: var(--gold); transition: transform 0.4s ease; user-select: none; font-family: 'DM Mono', monospace; font-weight: 300; }
       .project-card.open .card-toggle { transform: rotate(45deg); }
 
-      /* Card Body */
-      .card-body {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.6s ease;
-      }
+      .card-body { max-height: 0; overflow: hidden; transition: max-height 0.6s ease; }
       .project-card.open .card-body { max-height: 6000px; }
 
-      .card-inner {
-        padding: 0 48px 48px;
-        border-top: 1px solid var(--border);
-      }
+      .card-inner { padding: 0 48px 48px; border-top: 1px solid var(--border); }
+      .card-desc { font-size: 0.72rem; color: #b0a898; line-height: 2; letter-spacing: 0.02em; margin: 28px 0; max-width: 800px; }
 
-      .card-desc {
-        font-size: 0.72rem;
-        color: #b0a898;
-        line-height: 2;
-        letter-spacing: 0.02em;
-        margin: 28px 0;
-        max-width: 800px;
-      }
+      .card-links { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+      .card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 20px; transition: all 0.3s; }
+      .card-link:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 
-      .card-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-bottom: 32px;
-      }
-      .card-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.6rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--gold);
-        text-decoration: none;
-        border: 1px solid var(--border);
-        padding: 8px 20px;
-        transition: all 0.3s;
-      }
-      .card-link:hover {
-        background: rgba(201,168,76,0.08);
-        border-color: var(--gold);
-      }
-
-      /* Media */
-      .media-grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        margin-top: 24px;
-      }
+      .media-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
       .media-full { margin-top: 24px; }
-
-      .media-frame {
-        border: 1px solid var(--border);
-        overflow: hidden;
-        position: relative;
-        background: #080808;
-      }
-      .media-frame video,
-      .media-frame img,
-      .media-frame audio { width: 100%; display: block; }
+      .media-frame { border: 1px solid var(--border); overflow: hidden; position: relative; background: #080808; }
+      .media-frame video, .media-frame img, .media-frame audio { width: 100%; display: block; }
       .media-frame iframe { width: 100%; display: block; border: none; }
-
-      /* Fixed tall aspect for TryOn to show full content */
       .aspect-tall { aspect-ratio: 9/14; }
       .aspect-16-9 { aspect-ratio: 16/9; }
       .aspect-9-16 { aspect-ratio: 9/16; }
       .media-frame img { object-fit: cover; }
+      .media-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
 
-      .media-label {
-        font-size: 0.55rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        margin-top: 8px;
-      }
-
-      /* Horizontal scroll strip */
-      .scroll-strip {
-        margin-top: 24px;
-        overflow-x: auto;
-        display: flex;
-        gap: 12px;
-        padding-bottom: 12px;
-        scrollbar-width: thin;
-        scrollbar-color: var(--gold) transparent;
-      }
+      .scroll-strip { margin-top: 24px; overflow-x: auto; display: flex; gap: 12px; padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
       .scroll-strip::-webkit-scrollbar { height: 2px; }
       .scroll-strip::-webkit-scrollbar-track { background: transparent; }
       .scroll-strip::-webkit-scrollbar-thumb { background: var(--gold); }
-      .scroll-strip .media-frame {
-        flex: 0 0 auto;
-        height: 420px;
-        width: auto;
-      }
-      .scroll-strip .media-frame img {
-        height: 100%;
-        width: auto;
-        object-fit: cover;
-      }
+      .scroll-strip .media-frame { flex: 0 0 auto; height: 420px; width: auto; }
+      .scroll-strip .media-frame img { height: 100%; width: auto; object-fit: cover; }
 
-      /* Audio player */
-      .audio-wrap {
-        margin-top: 24px;
-        border: 1px solid var(--border);
-        padding: 24px 32px;
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        background: #080808;
-      }
+      .audio-wrap { margin-top: 24px; border: 1px solid var(--border); padding: 24px 32px; display: flex; align-items: center; gap: 24px; background: #080808; }
       .audio-icon { font-size: 2rem; color: var(--gold); }
       .audio-info { flex: 1; }
-      .audio-title {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1rem;
-        color: var(--paper);
-        margin-bottom: 4px;
-      }
-      .audio-sub {
-        font-size: 0.58rem;
-        letter-spacing: 0.15em;
-        color: var(--text-muted);
-        text-transform: uppercase;
-      }
-      .audio-wrap audio {
-        flex: 2;
-        filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg);
-      }
+      .audio-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--paper); margin-bottom: 4px; }
+      .audio-sub { font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
+      .audio-wrap audio { flex: 2; filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg); }
 
-      /* AI Brochure PDF embed */
-      .pdf-frame {
-        margin-top: 24px;
-        border: 1px solid var(--border);
-        background: #080808;
-        position: relative;
-      }
-      .pdf-frame iframe {
-        width: 100%;
-        height: 700px;
-        display: block;
-        border: none;
-      }
+      .pdf-frame { margin-top: 24px; border: 1px solid var(--border); background: #080808; }
+      .pdf-frame iframe { width: 100%; height: 700px; display: block; border: none; }
 
-      /* ── FOOTER ── */
-      footer {
-        padding: 60px 80px;
-        border-top: 1px solid var(--border);
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 40px;
-      }
-      .footer-name {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 2rem;
-        font-weight: 300;
-        color: var(--paper);
-      }
+      footer { padding: 60px 80px; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px; }
+      .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--paper); }
       .footer-name em { font-style: italic; color: var(--gold); }
       .footer-nav ul { list-style: none; display: flex; gap: 28px; justify-content: center; }
-      .footer-nav ul li a {
-        font-size: 0.6rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        text-decoration: none;
-        transition: color 0.3s;
-      }
+      .footer-nav ul li a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
       .footer-nav ul li a:hover { color: var(--gold); }
       .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
       .footer-socials { display: flex; gap: 16px; }
-      .footer-socials a {
-        font-size: 0.6rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        text-decoration: none;
-        transition: color 0.3s;
-      }
+      .footer-socials a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
       .footer-socials a:hover { color: var(--gold); }
-      .footer-credit {
-        font-size: 0.55rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgba(136,112,112,0.4);
-      }
+      .footer-credit { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(136,112,112,0.4); }
 
-      /* ── ANIMATIONS ── */
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(24px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to   { opacity: 1; }
-      }
-      @keyframes marquee {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
-      }
-
-      .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
-      }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
       .reveal.visible { opacity: 1; transform: none; }
     </style>
   </head>
@@ -503,7 +141,6 @@
     <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- HEADER -->
     <header id="header">
       <a class="nav-logo" href="https://y65zhu.github.io/Personal-Website-Design/">Annora <span>Zhu</span></a>
       <nav>
@@ -521,15 +158,13 @@
       </div>
     </header>
 
-    <!-- PAGE HERO -->
     <div class="page-hero">
-      <p class="page-hero-tag">Selected Work · 2022–2025</p>
+      <p class="page-hero-tag">Selected Work · 2022–2026</p>
       <h1>My <em>Projects</em></h1>
       <p class="page-hero-sub">Design · Photography · Film · Code · Experience</p>
       <div class="project-count">08</div>
     </div>
 
-    <!-- MARQUEE -->
     <div class="marquee-bar">
       <div class="marquee-inner">
         <span>TryOn Buddy</span><span class="accent">✦</span>
@@ -554,8 +189,8 @@
     <main>
       <div class="section-label reveal">Projects</div>
 
-      <!-- ── 01: TryOn Buddy ── -->
-      <div class="project-card" data-index="0">
+      <!-- 01: TryOn Buddy — anchor: proj-tryon (UI/UX Designer) -->
+      <div class="project-card" id="proj-tryon" data-index="0">
         <div class="card-header">
           <div class="card-num">01</div>
           <div class="card-title-wrap">
@@ -567,7 +202,6 @@
         <div class="card-body">
           <div class="card-inner">
             <p class="card-desc">An independently developed smart virtual try-on application designed to personalize the online shopping experience. The prototype enables users to upload their own photos, search for specific brands (such as Lululemon), and instantly preview how different styles and color options look on them. Features an AI-powered Color Analysis engine delivering compatibility scores and tailored style insights.</p>
-            <!-- Taller aspect ratio so full content is visible -->
             <div class="media-grid-2">
               <div>
                 <div class="media-frame aspect-tall">
@@ -579,11 +213,7 @@
               </div>
               <div>
                 <div class="media-frame aspect-tall">
-                  <iframe
-                    src="https://embed.figma.com/proto/t6qE7RMo78vmX3G9i8gidM/TryOn-Buddy?node-id=106-2047&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share"
-                    allowfullscreen
-                    style="height:100%;">
-                  </iframe>
+                  <iframe src="https://embed.figma.com/proto/t6qE7RMo78vmX3G9i8gidM/TryOn-Buddy?node-id=106-2047&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&embed-host=share" allowfullscreen style="height:100%;"></iframe>
                 </div>
                 <div class="media-label">Figma Prototype · Interactive</div>
               </div>
@@ -592,8 +222,8 @@
         </div>
       </div>
 
-      <!-- ── 02: Excel Gum ── -->
-      <div class="project-card" data-index="1">
+      <!-- 02: Excel Gum — anchor: proj-excel (Marketing & Social Media) -->
+      <div class="project-card" id="proj-excel" data-index="1">
         <div class="card-header">
           <div class="card-num">02</div>
           <div class="card-title-wrap">
@@ -609,9 +239,7 @@
               <a class="card-link" href="https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:8dc182b8-286a-5a15-840b-fe08ccf0c6c2?invite=true&accept=true&promoid=Z2G1FQKR&mv=other" target="_blank">Full Presentation →</a>
             </div>
             <div class="media-full">
-              <div class="media-frame">
-                <img src="mockup-set02.png" alt="Excel Gum mockup">
-              </div>
+              <div class="media-frame"><img src="mockup-set02.png" alt="Excel Gum mockup"></div>
               <div class="media-label">Packaging Mockup</div>
             </div>
             <div class="media-grid-2" style="margin-top:16px;">
@@ -642,7 +270,7 @@
         </div>
       </div>
 
-      <!-- ── 03: CAN Talk ── -->
+      <!-- 03: CAN Talk -->
       <div class="project-card" data-index="2">
         <div class="card-header">
           <div class="card-num">03</div>
@@ -660,34 +288,22 @@
               <a class="card-link" href="https://www.figma.com/proto/dIOZMxhIneCquwTWyfRGYf/Wu_Nicole_M3Figma?node-id=6-413&starting-point-node-id=6%3A413&t=BmBju4itB9U8lihN-1" target="_blank">Figma Prototype →</a>
             </div>
             <div class="media-grid-2">
-              <div>
-                <div class="media-frame"><img src="1.png" alt="Wireframe Set 1"></div>
-                <div class="media-label">Wireframe Set 01</div>
-              </div>
-              <div>
-                <div class="media-frame"><img src="2.png" alt="Wireframe Set 2"></div>
-                <div class="media-label">Wireframe Set 02</div>
-              </div>
+              <div><div class="media-frame"><img src="1.png" alt="Wireframe Set 1"></div><div class="media-label">Wireframe Set 01</div></div>
+              <div><div class="media-frame"><img src="2.png" alt="Wireframe Set 2"></div><div class="media-label">Wireframe Set 02</div></div>
             </div>
             <div class="media-full" style="margin-top:16px;">
               <div class="media-frame"><img src="3.png" alt="Full Screen Flow"></div>
               <div class="media-label">Full Screen Flow</div>
             </div>
             <div class="media-grid-2" style="margin-top:16px;">
-              <div>
-                <div class="media-frame"><img src="use1.png" alt="Storyboard: Preparing for Interview"></div>
-                <div class="media-label">Storyboard · Preparing for Interview</div>
-              </div>
-              <div>
-                <div class="media-frame"><img src="use2.png" alt="Storyboard: Doing the Lessons"></div>
-                <div class="media-label">Storyboard · Doing the Lessons</div>
-              </div>
+              <div><div class="media-frame"><img src="use1.png" alt="Storyboard 1"></div><div class="media-label">Storyboard · Preparing for Interview</div></div>
+              <div><div class="media-frame"><img src="use2.png" alt="Storyboard 2"></div><div class="media-label">Storyboard · Doing the Lessons</div></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── 04: Audio Documentary ── -->
+      <!-- 04: Audio Documentary -->
       <div class="project-card" data-index="3">
         <div class="card-header">
           <div class="card-num">04</div>
@@ -706,16 +322,14 @@
                 <div class="audio-title">Jane – Night Shift</div>
                 <div class="audio-sub">Audio Documentary · UWaterloo</div>
               </div>
-              <audio controls>
-                <source src="Zhu_PRJ3_FINAL.mp3" type="audio/mpeg">
-              </audio>
+              <audio controls><source src="Zhu_PRJ3_FINAL.mp3" type="audio/mpeg"></audio>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ── 05: Antiques in Time ── -->
-      <div class="project-card" data-index="4">
+      <!-- 05: Antiques in Time — anchor: proj-antiques (Video Editing) -->
+      <div class="project-card" id="proj-antiques" data-index="4">
         <div class="card-header">
           <div class="card-num">05</div>
           <div class="card-title-wrap">
@@ -737,7 +351,7 @@
         </div>
       </div>
 
-      <!-- ── 06: AI Intelligence Brochure (replaces Best Story Ever) ── -->
+      <!-- 06: AI Certificate Brochure -->
       <div class="project-card" data-index="5">
         <div class="card-header">
           <div class="card-num">06</div>
@@ -753,14 +367,16 @@
             <div class="card-links">
               <a class="card-link" href="Ai_certificate.pdf" target="_blank">View Full Brochure PDF →</a>
             </div>
-           
+            <div class="pdf-frame">
+              <iframe src="Ai_certificate.pdf" title="AI Certificate Brochure"></iframe>
+            </div>
             <div class="media-label" style="margin-top:10px;">Adobe InDesign · University of Waterloo WatSPEED · 2025</div>
           </div>
         </div>
       </div>
 
-      <!-- ── 07: Before I Forget (NEW) ── -->
-      <div class="project-card" data-index="6">
+      <!-- 07: Before I Forget — anchor: proj-before-i-forget (Front-End Developer) -->
+      <div class="project-card" id="proj-before-i-forget" data-index="6">
         <div class="card-header">
           <div class="card-num">07</div>
           <div class="card-title-wrap">
@@ -777,11 +393,7 @@
             </div>
             <div class="media-full">
               <div class="media-frame aspect-16-9">
-                <iframe
-                  src="https://qhtan1.github.io/A2_Group9B_MidTermGame/"
-                  title="Before I Forget – Interactive Game"
-                  allowfullscreen>
-                </iframe>
+                <iframe src="https://qhtan1.github.io/A2_Group9B_MidTermGame/" title="Before I Forget – Interactive Game" allowfullscreen></iframe>
               </div>
               <div class="media-label">Before I Forget · Live Playable Demo</div>
             </div>
@@ -789,7 +401,7 @@
         </div>
       </div>
 
-      <!-- ── 08: CS Games ── -->
+      <!-- 08: CS Games -->
       <div class="project-card" data-index="7">
         <div class="card-header">
           <div class="card-num">08</div>
@@ -821,7 +433,6 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div class="footer-name">Annora <em>Zhu</em></div>
       <div class="footer-nav">
@@ -843,31 +454,26 @@
     </footer>
 
     <script>
-      // Custom cursor
       const cursor = document.getElementById('cursor');
-      const ring = document.getElementById('cursorRing');
+      const ring   = document.getElementById('cursorRing');
       document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top  = e.clientY + 'px';
-        ring.style.left   = e.clientX + 'px';
-        ring.style.top    = e.clientY + 'px';
+        cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+        ring.style.left   = e.clientX + 'px'; ring.style.top   = e.clientY + 'px';
       });
       document.querySelectorAll('a, .card-header').forEach(el => {
         el.addEventListener('mouseenter', () => { ring.style.width='56px'; ring.style.height='56px'; ring.style.opacity='1'; });
         el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.6'; });
       });
 
-      // Header scroll
       const header = document.getElementById('header');
       window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
 
-      // Section label reveal
+      const reveals = document.querySelectorAll('.reveal');
       const revealObs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
       }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+      reveals.forEach(el => revealObs.observe(el));
 
-      // Project card scroll reveal + accordion
       const cards = document.querySelectorAll('.project-card');
       const cardObs = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
@@ -885,6 +491,18 @@
           cards.forEach(c => c.classList.remove('open'));
           if (!isOpen) card.classList.add('open');
         });
+      });
+
+      // Auto-open and scroll to the card if arriving via anchor link
+      window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+          const target = document.querySelector(hash);
+          if (target && target.classList.contains('project-card')) {
+            target.classList.add('open', 'visible');
+            setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+          }
+        }
       });
     </script>
   </body>
