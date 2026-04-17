@@ -24,35 +24,35 @@
       .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.3em; color: var(--paper); text-transform: uppercase; text-decoration: none; }
       .nav-logo span { color: var(--gold); }
       nav ul { list-style: none; display: flex; gap: 36px; }
-      nav ul li a { font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; position: relative; transition: color 0.3s; }
+      nav ul li a { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; position: relative; transition: color 0.3s; }
       nav ul li a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
       nav ul li a:hover, nav ul li a.active { color: var(--gold); }
       nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
       .nav-socials { display: flex; gap: 16px; }
-      .nav-socials a { font-size: 0.96rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+      .nav-socials a { font-size: 0.7rem; color: var(--text-muted); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
       .nav-socials a:hover { color: var(--gold); }
 
       /* PAGE HERO */
       .page-hero { padding: 160px 80px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
       .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; }
-      .page-hero-tag { font-size: 1rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s; }
+      .page-hero-tag { font-size: 0.62rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.3s; }
       .page-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(4rem, 8vw, 8rem); font-weight: 300; line-height: 0.9; color: var(--paper); opacity: 0; animation: fadeUp 1s ease forwards 0.5s; }
       .page-hero h1 em { font-style: italic; color: var(--gold); }
-      .page-hero-sub { margin-top: 28px; font-size: 1.03rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+      .page-hero-sub { margin-top: 28px; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
       .project-count { position: absolute; bottom: 40px; right: 80px; font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: rgba(201,168,76,0.08); line-height: 1; opacity: 0; animation: fadeIn 1s ease forwards 1s; }
 
       /* MARQUEE */
       .marquee-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--ink); overflow: hidden; padding: 14px 0; white-space: nowrap; }
-      .marquee-inner { display: inline-flex; animation: marquee 26s linear infinite; }
-      .marquee-inner span { font-size: 0.98rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); padding: 0 40px; }
+      .marquee-inner { display: inline-flex; animation: marquee 30s linear infinite; }
+      .marquee-inner span { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); padding: 0 40px; }
       .marquee-inner span.accent { color: var(--gold); }
 
       /* MAIN */
       main { padding: 0 80px 100px; }
-      .section-label { font-size: 0.96rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin: 80px 0 50px; display: flex; align-items: center; gap: 20px; opacity: 1; }
+      .section-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin: 80px 0 50px; display: flex; align-items: center; gap: 20px; }
       .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-      /* PROJECT CARDS — always visible, no opacity animation that could hide them */
+      /* PROJECT CARDS */
       .project-card {
         scroll-margin-top: 100px;
         border: 1px solid var(--border);
@@ -60,7 +60,6 @@
         background: #0d0d0d;
         overflow: hidden;
         position: relative;
-        /* Entrance animation via class added by JS — but card is always at least shown */
         opacity: 1;
         transform: none;
       }
@@ -73,7 +72,7 @@
       .project-card:hover .card-header { background: rgba(201,168,76,0.04); }
       .card-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; color: rgba(201,168,76,0.2); line-height: 1; transition: color 0.3s; }
       .project-card:hover .card-num { color: rgba(201,168,76,0.5); }
-      .card-category { font-size: 0.94rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+      .card-category { font-size: 0.56rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
       .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--paper); line-height: 1.1; }
       .card-toggle { font-size: 1.4rem; color: var(--gold); transition: transform 0.4s ease; user-select: none; font-family: 'DM Mono', monospace; font-weight: 300; }
       .project-card.open .card-toggle { transform: rotate(45deg); }
@@ -82,37 +81,24 @@
       .project-card.open .card-body { max-height: 8000px; }
 
       .card-inner { padding: 0 48px 48px; border-top: 1px solid var(--border); }
-      .card-desc { font-size: 0.98rem; color: #b0a898; line-height: 2; letter-spacing: 0.02em; margin: 28px 0; max-width: 800px; }
+      .card-desc { font-size: 0.72rem; color: #b0a898; line-height: 2; letter-spacing: 0.02em; margin: 28px 0; max-width: 800px; }
 
       .card-links { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
-      .card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.98rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 20px; transition: all 0.3s; }
+      .card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 20px; transition: all 0.3s; }
       .card-link:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 
       /* MEDIA */
       .media-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
       .media-full { margin-top: 24px; }
-
       .ratio-box { position: relative; width: 100%; background: #080808; border: 1px solid var(--border); overflow: hidden; }
       .ratio-box.r-16-9  { padding-bottom: 56.25%; }
       .ratio-box.r-9-16  { padding-bottom: 177.78%; }
       .ratio-box.r-tall  { padding-bottom: 155.56%; }
-      .ratio-box.r-pdf   { padding-bottom: 130%; }
-
-      .ratio-box iframe,
-      .ratio-box video {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        border: none;
-        display: block;
-      }
+      .ratio-box iframe, .ratio-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; }
       .ratio-box video { object-fit: contain; background: #000; }
-
       .img-frame { border: 1px solid var(--border); overflow: hidden; background: #080808; }
       .img-frame img { width: 100%; display: block; object-fit: cover; }
-
-      .media-label { font-size: 0.93rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
-
+      .media-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
       .scroll-strip { margin-top: 24px; overflow-x: auto; display: flex; gap: 12px; padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
       .scroll-strip::-webkit-scrollbar { height: 2px; }
       .scroll-strip::-webkit-scrollbar-track { background: transparent; }
@@ -126,14 +112,14 @@
       .pdf-icon { flex-shrink: 0; }
       .pdf-meta { flex: 1; }
       .pdf-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--paper); margin-bottom: 8px; }
-      .pdf-sub { font-size: 0.96rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+      .pdf-sub { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
 
       /* Audio */
       .audio-wrap { margin-top: 24px; border: 1px solid var(--border); padding: 24px 32px; display: flex; align-items: center; gap: 24px; background: #080808; }
       .audio-icon { font-size: 2rem; color: var(--gold); }
       .audio-info { flex: 1; }
       .audio-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--paper); margin-bottom: 4px; }
-      .audio-sub { font-size: 0.96rem; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
+      .audio-sub { font-size: 0.58rem; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
       .audio-wrap audio { flex: 2; filter: invert(1) sepia(1) saturate(2) hue-rotate(10deg); }
 
       /* FOOTER */
@@ -141,13 +127,13 @@
       .footer-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--paper); }
       .footer-name em { font-style: italic; color: var(--gold); }
       .footer-nav ul { list-style: none; display: flex; gap: 28px; justify-content: center; }
-      .footer-nav ul li a { font-size: 0.98rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+      .footer-nav ul li a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
       .footer-nav ul li a:hover { color: var(--gold); }
       .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
       .footer-socials { display: flex; gap: 16px; }
-      .footer-socials a { font-size: 0.98rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+      .footer-socials a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
       .footer-socials a:hover { color: var(--gold); }
-      .footer-credit { font-size: 0.93rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(136,112,112,0.4); }
+      .footer-credit { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(136,112,112,0.4); }
 
       /* ANIMATIONS */
       @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
@@ -181,7 +167,7 @@
       <p class="page-hero-tag">Selected Work · 2022–2026</p>
       <h1>My <em>Projects</em></h1>
       <p class="page-hero-sub">Design · Photography · Film · Code · Experience</p>
-      <div class="project-count">09</div>
+      <div class="project-count">10</div>
     </div>
 
     <div class="marquee-bar">
@@ -193,8 +179,9 @@
         <span>Antiques in Time</span><span class="accent">✦</span>
         <span>AI Brochure</span><span class="accent">✦</span>
         <span>Before I Forget</span><span class="accent">✦</span>
-        <span>WaterlooWorks</span><span class="accent">✦</span>
         <span>CS Games</span><span class="accent">✦</span>
+        <span>WaterlooWorks</span><span class="accent">✦</span>
+        <span>Biblely</span><span class="accent">✦</span>
         <span>TryOn Buddy</span><span class="accent">✦</span>
         <span>Excel Rebrand</span><span class="accent">✦</span>
         <span>CAN Talk App</span><span class="accent">✦</span>
@@ -202,18 +189,45 @@
         <span>Antiques in Time</span><span class="accent">✦</span>
         <span>AI Brochure</span><span class="accent">✦</span>
         <span>Before I Forget</span><span class="accent">✦</span>
-        <span>WaterlooWorks</span><span class="accent">✦</span>
         <span>CS Games</span><span class="accent">✦</span>
+        <span>WaterlooWorks</span><span class="accent">✦</span>
+        <span>Biblely</span><span class="accent">✦</span>
       </div>
     </div>
 
     <main>
       <div class="section-label">Projects</div>
 
-      <!-- 01: TryOn Buddy -->
-      <div class="project-card" id="proj-tryon">
+      <!-- 01: Biblely -->
+      <div class="project-card" id="proj-biblely">
         <div class="card-header">
           <div class="card-num">01</div>
+          <div class="card-title-wrap">
+            <div class="card-category">UX Design · App Design · Bilingual</div>
+            <h3 class="card-title">Biblely — Bilingual Faith Learning App</h3>
+          </div>
+          <div class="card-toggle">+</div>
+        </div>
+        <div class="card-body">
+          <div class="card-inner">
+            <p class="card-desc">Biblely transforms scripture reading into clear understanding through plain-language explanations, guided reflection, and community connection — helping users not just read, but truly engage with each chapter. Designed as a bilingual experience to make faith accessible across languages and cultures.</p>
+            <div class="card-links">
+              <a class="card-link" href="https://y65zhu.github.io/Biblely/" target="_blank">View Live Prototype →</a>
+            </div>
+            <div class="media-full">
+              <div class="ratio-box r-16-9">
+                <iframe src="https://y65zhu.github.io/Biblely/" title="Biblely" allowfullscreen></iframe>
+              </div>
+              <div class="media-label">Biblely · Bilingual Faith Learning App · Live Interactive Prototype</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: TryOn Buddy -->
+      <div class="project-card" id="proj-tryon">
+        <div class="card-header">
+          <div class="card-num">02</div>
           <div class="card-title-wrap">
             <div class="card-category">UX Design · AI · Prototyping</div>
             <h3 class="card-title">TryOn Buddy – AI Fashion App</h3>
@@ -243,10 +257,10 @@
         </div>
       </div>
 
-      <!-- 02: Excel Gum Rebrand -->
+      <!-- 03: Excel Gum Rebrand -->
       <div class="project-card" id="proj-excel">
         <div class="card-header">
-          <div class="card-num">02</div>
+          <div class="card-num">03</div>
           <div class="card-title-wrap">
             <div class="card-category">Branding · Social Media · Campaign</div>
             <h3 class="card-title">Excel Gum Rebrand</h3>
@@ -289,10 +303,10 @@
         </div>
       </div>
 
-      <!-- 03: CAN Talk -->
+      <!-- 04: CAN Talk -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">03</div>
+          <div class="card-num">04</div>
           <div class="card-title-wrap">
             <div class="card-category">UX · App Design · Figma</div>
             <h3 class="card-title">CAN Talk App Design</h3>
@@ -322,10 +336,10 @@
         </div>
       </div>
 
-      <!-- 04: Audio Documentary -->
+      <!-- 05: Audio Documentary -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">04</div>
+          <div class="card-num">05</div>
           <div class="card-title-wrap">
             <div class="card-category">Audio · Documentary · Storytelling</div>
             <h3 class="card-title">Audio Documentary</h3>
@@ -347,10 +361,10 @@
         </div>
       </div>
 
-      <!-- 05: Antiques in Time -->
+      <!-- 06: Antiques in Time -->
       <div class="project-card" id="proj-antiques">
         <div class="card-header">
-          <div class="card-num">05</div>
+          <div class="card-num">06</div>
           <div class="card-title-wrap">
             <div class="card-category">Documentary · Film · Interview</div>
             <h3 class="card-title">Antiques in Time Documentary</h3>
@@ -370,11 +384,10 @@
         </div>
       </div>
 
-      <!-- 06: AI Certificate Brochure -->
-      <!-- NOTE: filename is "Ai certificate.pdf" with a SPACE — must match exactly -->
+      <!-- 07: AI Certificate Brochure -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">06</div>
+          <div class="card-num">07</div>
           <div class="card-title-wrap">
             <div class="card-category">Print Design · InDesign · WatSPEED</div>
             <h3 class="card-title">Artificial Intelligence Certificate — Program Brochure</h3>
@@ -385,24 +398,31 @@
           <div class="card-inner">
             <p class="card-desc">Designed a professional program brochure for WatSPEED's Artificial Intelligence Certificate at the University of Waterloo using Adobe InDesign. The brochure communicates the program's value proposition, course structure, learning outcomes, and key takeaways across eight pages — balancing typographic clarity with bold visual hierarchy to attract prospective learners.</p>
             <div class="card-links">
-              <a class="card-link" href="./Ai-certificate.pdf" target="_blank">Open PDF →</a>
+              <a class="card-link" href="./ai-certificate.pdf" target="_blank">Open PDF →</a>
             </div>
-            <div class="media-full">
-              <div class="ratio-box r-pdf">
-                <object data="./Ai-certificate.pdf" type="application/pdf" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
-                  <iframe src="./Ai-certificate.pdf" title="AI Certificate Program Brochure" style="width:100%;height:100%;border:none;"></iframe>
-                </object>
+            <div class="pdf-preview">
+              <div class="pdf-icon">
+                <svg width="48" height="60" viewBox="0 0 48 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="1" y="1" width="46" height="58" rx="3" stroke="rgba(201,168,76,0.4)" stroke-width="1.5" fill="#0d0d0d"/>
+                  <path d="M28 1v14h14" stroke="rgba(201,168,76,0.4)" stroke-width="1.5" fill="none"/>
+                  <path d="M28 1L42 15" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+                  <text x="24" y="42" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#c9a84c" letter-spacing="1">PDF</text>
+                </svg>
               </div>
-              <div class="media-label">AI Certificate Brochure · 8 Pages · Adobe InDesign · WatSPEED 2025</div>
+              <div class="pdf-meta">
+                <div class="pdf-title">AI Certificate Program Brochure</div>
+                <div class="pdf-sub">Adobe InDesign · WatSPEED · University of Waterloo · 2025</div>
+                <div class="pdf-sub">8 pages · Print-ready brochure design</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 07: Before I Forget -->
+      <!-- 08: Before I Forget -->
       <div class="project-card" id="proj-before-i-forget">
         <div class="card-header">
-          <div class="card-num">07</div>
+          <div class="card-num">08</div>
           <div class="card-title-wrap">
             <div class="card-category">Interaction Design · JavaScript · p5.js · Figma</div>
             <h3 class="card-title">Before I Forget — Interactive Narrative Game</h3>
@@ -420,29 +440,6 @@
                 <iframe src="https://qhtan1.github.io/A2_Group9B_MidTermGame/" title="Before I Forget" allowfullscreen></iframe>
               </div>
               <div class="media-label">Before I Forget · Live Playable Demo</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 08: WaterlooWorks Redesign -->
-      <div class="project-card" id="proj-waterlooworks">
-        <div class="card-header">
-          <div class="card-num">08</div>
-          <div class="card-title-wrap">
-            <div class="card-category">UX Design · Interaction · Figma · Prototype</div>
-            <h3 class="card-title">WaterlooWorks — Employer Page Redesign</h3>
-          </div>
-          <div class="card-toggle">+</div>
-        </div>
-        <div class="card-body">
-          <div class="card-inner">
-            <p class="card-desc">A full UX redesign of the WaterlooWorks employer-facing job posting flow. The redesign introduces a guided multi-step form with transparent evaluation criteria, salary sliders, fair hiring practice prompts, and a live posting preview — streamlining the experience for employers while improving equity and clarity for student applicants.</p>
-            <div class="media-full">
-              <div class="ratio-box" style="padding-bottom:62%;">
-                <iframe src="./waterlooworks.html" title="WaterlooWorks Employer Redesign Prototype" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;"></iframe>
-              </div>
-              <div class="media-label">WaterlooWorks · Employer Job Posting Redesign · Live Interactive Prototype</div>
             </div>
           </div>
         </div>
@@ -473,6 +470,36 @@
                 <iframe src="https://www.youtube.com/embed/3ltd3IDpo70" allowfullscreen></iframe>
               </div>
               <div class="media-label">Harvest Heaven · Gameplay Demo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10: WaterlooWorks Redesign -->
+      <div class="project-card" id="proj-waterlooworks">
+        <div class="card-header">
+          <div class="card-num">10</div>
+          <div class="card-title-wrap">
+            <div class="card-category">UX Design · Interaction · Prototype</div>
+            <h3 class="card-title">WaterlooWorks — Employer Page Redesign</h3>
+          </div>
+          <div class="card-toggle">+</div>
+        </div>
+        <div class="card-body">
+          <div class="card-inner">
+            <p class="card-desc">A full UX redesign of the WaterlooWorks employer-facing job posting flow. The redesign introduces a guided multi-step form with transparent evaluation criteria, salary sliders, fair hiring practice prompts, and a live posting preview — streamlining the experience for employers while improving equity and clarity for student applicants.</p>
+            <div class="card-links">
+              <a class="card-link" href="./waterlooworks.html" target="_blank">View Live Prototype →</a>
+            </div>
+            <div class="media-full">
+              <div style="width:100%; height:560px; border:1px solid var(--border); overflow:hidden; background:#f4f4f4;">
+                <iframe src="./waterlooworks.html"
+                  title="WaterlooWorks Employer Redesign"
+                  scrolling="no"
+                  style="width:100%; height:560px; border:none; display:block;">
+                </iframe>
+              </div>
+              <div class="media-label">WaterlooWorks · Employer Job Posting Redesign · Live Interactive Prototype</div>
             </div>
           </div>
         </div>
@@ -517,7 +544,7 @@
       const header = document.getElementById('header');
       window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 40));
 
-      // Accordion — click to open/close
+      // Accordion
       const cards = document.querySelectorAll('.project-card');
       cards.forEach(card => {
         card.querySelector('.card-header').addEventListener('click', () => {
