@@ -85,7 +85,7 @@
       /* Phone screenshots, three across. */
       .media-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
       .phone-frame { border: 1px solid var(--border); border-radius: 22px; overflow: hidden; background: #080808; }
-      .phone-frame img { width: 100%; display: block; }
+      .phone-frame img, .phone-frame video { width: 100%; display: block; aspect-ratio: 480 / 1044; object-fit: cover; }
       /* Words and button beside the screens, so neither leaves a blank half. */
       .card-split { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: center; margin-top: 28px; }
       .card-split .card-desc { margin-top: 0; }
@@ -213,8 +213,8 @@
                 </div>
               </div>
               <div class="media-grid-3">
+                <div><div class="phone-frame"><video class="auto-video" src="dofocus/walkthrough.mp4" poster="dofocus/10-hello.jpg" muted playsinline loop controls preload="none" aria-label="DoFocus full walkthrough, recorded in the iOS Simulator"></video></div><div class="media-label">Full walkthrough · Video</div></div>
                 <div><div class="phone-frame"><img src="dofocus-01-home.jpg" alt="DoFocus home: the buddy's room, one-tap start and up next" loading="lazy"></div><div class="media-label">Home</div></div>
-                <div><div class="phone-frame"><img src="dofocus-02-focus.jpg" alt="DoFocus timer: presets above a rotary dial" loading="lazy"></div><div class="media-label">Set a block</div></div>
                 <div><div class="phone-frame"><img src="dofocus-03-session.jpg" alt="DoFocus mid-session: the buddy working at a laptop" loading="lazy"></div><div class="media-label">In session</div></div>
               </div>
             </div>
@@ -584,6 +584,16 @@
           box.style.setProperty('--proto-scale', entries[0].contentRect.width / 1280);
         }).observe(box);
       });
+      // Walkthrough videos play only while on screen, and load only then.
+      const autoVideos = document.querySelectorAll('.auto-video');
+      if ('IntersectionObserver' in window) {
+        const seen = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.play().catch(function () {}); } else { e.target.pause(); }
+          });
+        }, { threshold: 0.5 });
+        autoVideos.forEach(function (v) { seen.observe(v); });
+      }
     </script>
   </body>
 </html>
