@@ -86,6 +86,9 @@
       .media-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
       .phone-frame { border: 1px solid var(--border); border-radius: 22px; overflow: hidden; background: #080808; }
       .phone-frame img { width: 100%; display: block; }
+      /* Words and button beside the screens, so neither leaves a blank half. */
+      .card-split { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; align-items: center; margin-top: 28px; }
+      .card-split .card-desc { margin-top: 0; }
 
       /* MEDIA */
       .media-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
@@ -195,20 +198,25 @@
         <div class="card-header">
           <div class="card-num">01</div>
           <div class="card-title-wrap">
-            <div class="card-category">UX Design · iOS App · SwiftUI</div>
+            <div class="card-category">Front-End Design · UX · Marketing · iOS</div>
             <h3 class="card-title">DoFocus — Focus Timer with a Buddy</h3>
           </div>
           <div class="card-toggle">+</div>
         </div>
         <div class="card-body">
           <div class="card-inner">
-            <p class="card-desc">An iOS focus app where a hand-drawn buddy works alongside you: pick what you’re focusing on, turn the dial, and your buddy studies, reads or types until the timer ends — then you earn stars to decorate their room. I led a UX redesign after studying Forest, Finch and Focus Friend: onboarding cut from six screens to three, breaks offered instead of auto-started, long sentences replaced with glanceable numbers, and 15 friction points from a full UX audit resolved, each verified in the iOS Simulator.</p>
-            <div class="media-full" style="max-width:840px;">
-            <div class="media-grid-3">
-              <div><div class="phone-frame"><img src="dofocus-01-home.jpg" alt="DoFocus home: the buddy's room, one-tap start and up next" loading="lazy"></div><div class="media-label">Home</div></div>
-              <div><div class="phone-frame"><img src="dofocus-02-focus.jpg" alt="DoFocus timer: presets above a rotary dial" loading="lazy"></div><div class="media-label">Set a block</div></div>
-              <div><div class="phone-frame"><img src="dofocus-03-session.jpg" alt="DoFocus mid-session: the buddy working at a laptop" loading="lazy"></div><div class="media-label">In session</div></div>
-            </div>
+            <div class="card-split">
+              <div>
+                <p class="card-desc">An iOS focus app where a hand-drawn buddy works alongside you: pick what you’re focusing on, turn the dial, and your buddy studies, reads or types until the timer ends — then you earn stars to decorate their room. I owned the entire front-end design — every screen, flow and interaction — and all of the marketing. My latest UX redesign, informed by research into Forest, Finch and Focus Friend, cut onboarding from six screens to three, made breaks opt-in instead of automatic, and resolved 15 friction points from a full UX audit.</p>
+                <div class="card-links" style="margin-bottom:0;">
+                  <a class="card-link" href="./dofocus.html" target="_blank">View Prototype →</a>
+                </div>
+              </div>
+              <div class="media-grid-3">
+                <div><div class="phone-frame"><img src="dofocus-01-home.jpg" alt="DoFocus home: the buddy's room, one-tap start and up next" loading="lazy"></div><div class="media-label">Home</div></div>
+                <div><div class="phone-frame"><img src="dofocus-02-focus.jpg" alt="DoFocus timer: presets above a rotary dial" loading="lazy"></div><div class="media-label">Set a block</div></div>
+                <div><div class="phone-frame"><img src="dofocus-03-session.jpg" alt="DoFocus mid-session: the buddy working at a laptop" loading="lazy"></div><div class="media-label">In session</div></div>
+              </div>
             </div>
           </div>
         </div>

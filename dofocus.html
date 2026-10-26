@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoFocus — Interactive Prototype</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --ink: #0a0a0a; --paper: #f5f0e8; --gold: #c9a84c;
+        --text-muted: #888070; --border: rgba(201,168,76,0.25);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body { font-family: 'DM Mono', monospace; background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: center; padding: 32px 24px; }
+
+      .layout { display: grid; grid-template-columns: minmax(0, 340px) auto; gap: 72px; align-items: center; max-width: 1000px; width: 100%; }
+
+      /* Left: what this is, and every screen to jump to. */
+      .eyebrow { font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+      h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2.6rem; line-height: 1.05; margin-bottom: 18px; }
+      h1 em { color: var(--gold); font-style: italic; }
+      .how { font-size: 0.8rem; line-height: 1.9; color: #b0a898; margin-bottom: 28px; }
+      .screens { list-style: none; border-top: 1px solid var(--border); }
+      .screens button { width: 100%; display: flex; justify-content: space-between; gap: 12px; padding: 10px 2px; background: none; border: 0; border-bottom: 1px solid var(--border); color: var(--text-muted); font: inherit; font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; text-align: left; cursor: pointer; transition: color 0.2s; }
+      .screens button:hover { color: var(--paper); }
+      .screens button[aria-current="true"] { color: var(--gold); }
+      .screens .group { color: rgba(136,128,112,0.6); }
+      .back { display: inline-block; margin-top: 28px; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 18px; }
+      .back:hover { border-color: var(--gold); }
+
+      /* Right: the phone. Screens are 402 × 874 points, so hotspots are
+         placed in those units and scaled with the frame. */
+      .phone { position: relative; width: min(340px, calc((100vh - 64px) * 402 / 874)); aspect-ratio: 402 / 874; border-radius: 44px; overflow: hidden; box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 11px var(--border), 0 30px 80px rgba(0,0,0,0.6); background: #f8f7f2; }
+      .phone img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: opacity 0.18s ease; }
+      .phone img.fading { opacity: 0; }
+      .hot { position: absolute; border-radius: 14px; cursor: pointer; background: none; border: 0; }
+      .hot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      .phone.hinting .hot { background: rgba(201,168,76,0.28); box-shadow: 0 0 0 2px rgba(201,168,76,0.9); animation: pulse 0.9s ease-out; }
+      @keyframes pulse { from { box-shadow: 0 0 0 8px rgba(201,168,76,0); } }
+      .caption { margin-top: 18px; text-align: center; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); min-height: 1.2em; }
+
+      @media (max-width: 760px) {
+        body { align-items: flex-start; }
+        .layout { grid-template-columns: 1fr; gap: 36px; justify-items: center; }
+        .intro { max-width: 420px; }
+        .phone { width: min(320px, 86vw); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="intro">
+        <div class="eyebrow">Interactive Prototype · iOS</div>
+        <h1>DoFocus — <em>Focus Timer with a Buddy</em></h1>
+        <p class="how">Tap the phone like the real app. Tap anywhere else on the screen to see what's tappable.</p>
+        <ol class="screens" id="screens"></ol>
+        <a class="back" href="./index.html#proj-dofocus">← Back to projects</a>
+      </div>
+      <div>
+        <div class="phone" id="phone" role="group" aria-label="DoFocus prototype">
+          <img id="screen" alt="">
+        </div>
+        <div class="caption" id="caption"></div>
+      </div>
+    </div>
+
+    <script>
+      // Hotspots in device points (402 × 874), the size the screens were captured at.
+      const tabs = [
+        { x: 30, y: 800, w: 72, h: 50, to: 'home', label: 'Home tab' },
+        { x: 104, y: 800, w: 60, h: 50, to: 'ready', label: 'Focus tab' },
+        { x: 244, y: 800, w: 56, h: 50, to: 'tasks', label: 'Tasks tab' },
+        { x: 310, y: 800, w: 60, h: 50, to: 'me', label: 'Me tab' }
+      ];
+      const screens = {
+        hello:   { img: '10-hello',   group: 'Onboarding', name: 'Meet your buddy', caption: 'Onboarding · 1 of 3',
+                   hot: [{ x: 20, y: 808, w: 362, h: 52, to: 'look', label: "Let's go" }] },
+        look:    { img: '11-look',    group: 'Onboarding', name: 'Make it look like you', caption: 'Onboarding · 2 of 3 · Pick an outfit',
+                   hot: [{ x: 20, y: 771, w: 112, h: 54, to: 'hello', label: 'Back' },
+                         { x: 140, y: 771, w: 242, h: 54, to: 'picker', label: 'Next' }] },
+        picker:  { img: '12-picker',  group: 'Onboarding', name: 'What do you focus on?', caption: 'Onboarding · 3 of 3',
+                   hot: [{ x: 20, y: 771, w: 112, h: 54, to: 'look', label: 'Back' },
+                         { x: 140, y: 771, w: 242, h: 54, to: 'ready', label: 'Done' }] },
+        ready:   { img: '13-ready',   group: 'Focus', name: 'Ready, not running', caption: 'Lands on the timer — you press play',
+                   hot: [{ x: 160, y: 650, w: 82, h: 82, to: 'session', label: 'Start focus' }, ...tabs] },
+        session: { img: '03-session', group: 'Focus', name: 'In session', caption: 'Tabs hide while you focus',
+                   hot: [{ x: 222, y: 662, w: 58, h: 58, to: 'ready', label: 'Stop' }] },
+        home:    { img: '01-home',    group: 'App', name: 'Home', caption: 'One tap starts the selected preset',
+                   hot: [{ x: 17, y: 559, w: 178, h: 54, to: 'session', label: 'Start Project, 35 min' },
+                         { x: 300, y: 625, w: 52, h: 28, to: 'tasks', label: 'See all tasks' },
+                         { x: 360, y: 622, w: 30, h: 32, to: 'newtask', label: 'Add a task' }, ...tabs] },
+        tasks:   { img: '04-tasks',   group: 'App', name: 'Tasks', caption: 'Priorities as a board',
+                   hot: [{ x: 338, y: 62, w: 50, h: 46, to: 'newtask', label: 'New task' }, ...tabs] },
+        newtask: { img: '05-newtask', group: 'App', name: 'New task', caption: 'Title first — the rest is optional',
+                   hot: [{ x: 18, y: 78, w: 80, h: 44, to: 'tasks', label: 'Cancel' },
+                         { x: 318, y: 78, w: 70, h: 44, to: 'tasks', label: 'Add' }] },
+        me:      { img: '07-me',      group: 'App', name: 'Me', caption: 'Zeros come with a next step',
+                   hot: [{ x: 328, y: 497, w: 46, h: 46, to: 'ready', label: 'Start focusing' }, ...tabs] }
+      };
+
+      const phone = document.getElementById('phone');
+      const img = document.getElementById('screen');
+      const caption = document.getElementById('caption');
+      const list = document.getElementById('screens');
+      let current = null;
+
+      // Preload, so a tap swaps screens without a blank frame.
+      Object.values(screens).forEach(s => { new Image().src = `dofocus/${s.img}.jpg`; });
+
+      Object.entries(screens).forEach(([id, s]) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<button type="button" data-id="${id}"><span>${s.name}</span><span class="group">${s.group}</span></button>`;
+        li.firstChild.addEventListener('click', () => show(id));
+        list.appendChild(li);
+      });
+
+      function show(id) {
+        if (id === current) return;
+        const s = screens[id];
+        const first = current === null;
+        current = id;
+        img.classList.add('fading');
+        setTimeout(() => {
+          img.src = `dofocus/${s.img}.jpg`;
+          img.alt = `DoFocus — ${s.name}`;
+          img.classList.remove('fading');
+        }, first ? 0 : 120);
+        caption.textContent = s.caption;
+        phone.querySelectorAll('.hot').forEach(h => h.remove());
+        s.hot.forEach(h => {
+          const b = document.createElement('button');
+          b.className = 'hot';
+          b.type = 'button';
+          b.setAttribute('aria-label', h.label);
+          Object.assign(b.style, {
+            left: `${h.x / 402 * 100}%`, top: `${h.y / 874 * 100}%`,
+            width: `${h.w / 402 * 100}%`, height: `${h.h / 874 * 100}%`
+          });
+          b.addEventListener('click', e => { e.stopPropagation(); show(h.to); });
+          phone.appendChild(b);
+        });
+        list.querySelectorAll('button').forEach(b => b.setAttribute('aria-current', b.dataset.id === id));
+      }
+
+      // A tap that misses every hotspot shows where they are.
+      phone.addEventListener('click', () => {
+        phone.classList.remove('hinting');
+        void phone.offsetWidth;
+        phone.classList.add('hinting');
+        setTimeout(() => phone.classList.remove('hinting'), 900);
+      });
+
+      show('hello');
+    </script>
+  </body>
+</html>
