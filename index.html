@@ -78,6 +78,15 @@
       .card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 8px 20px; transition: all 0.3s; }
       .card-link:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
 
+      /* Desktop prototypes, drawn at desktop size and scaled to fit, so the
+         whole screen shows at any card width instead of being cropped. */
+      .proto-scale { position: relative; width: 100%; aspect-ratio: 1280 / 800; overflow: hidden; border: 1px solid var(--border); background: #f4f4f4; }
+      .proto-scale iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: none; display: block; transform-origin: 0 0; transform: scale(var(--proto-scale, 0.5)); }
+      /* Phone screenshots, three across. */
+      .media-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .phone-frame { border: 1px solid var(--border); border-radius: 22px; overflow: hidden; background: #080808; }
+      .phone-frame img { width: 100%; display: block; }
+
       /* MEDIA */
       .media-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
       .media-full { margin-top: 24px; }
@@ -153,6 +162,7 @@
 
     <div class="marquee-bar">
       <div class="marquee-inner">
+        <span>DoFocus</span><span class="accent">✦</span>
         <span>Biblely</span><span class="accent">✦</span>
         <span>TryOn Buddy</span><span class="accent">✦</span>
         <span>Excel Rebrand</span><span class="accent">✦</span>
@@ -163,6 +173,7 @@
         <span>Before I Forget</span><span class="accent">✦</span>
         <span>CS Games</span><span class="accent">✦</span>
         <span>WaterlooWorks</span><span class="accent">✦</span>
+        <span>DoFocus</span><span class="accent">✦</span>
         <span>Biblely</span><span class="accent">✦</span>
         <span>TryOn Buddy</span><span class="accent">✦</span>
         <span>Excel Rebrand</span><span class="accent">✦</span>
@@ -179,10 +190,34 @@
     <main>
       <div class="section-label">Projects</div>
 
-      <!-- 01: Biblely -->
-      <div class="project-card" id="proj-biblely">
+      <!-- 01: DoFocus -->
+      <div class="project-card" id="proj-dofocus">
         <div class="card-header">
           <div class="card-num">01</div>
+          <div class="card-title-wrap">
+            <div class="card-category">UX Design · iOS App · SwiftUI</div>
+            <h3 class="card-title">DoFocus — Focus Timer with a Buddy</h3>
+          </div>
+          <div class="card-toggle">+</div>
+        </div>
+        <div class="card-body">
+          <div class="card-inner">
+            <p class="card-desc">An iOS focus app where a hand-drawn buddy works alongside you: pick what you’re focusing on, turn the dial, and your buddy studies, reads or types until the timer ends — then you earn stars to decorate their room. I led a UX redesign after studying Forest, Finch and Focus Friend: onboarding cut from six screens to three, breaks offered instead of auto-started, long sentences replaced with glanceable numbers, and 15 friction points from a full UX audit resolved, each verified in the iOS Simulator.</p>
+            <div class="media-full" style="max-width:840px;">
+            <div class="media-grid-3">
+              <div><div class="phone-frame"><img src="dofocus-01-home.jpg" alt="DoFocus home: the buddy's room, one-tap start and up next" loading="lazy"></div><div class="media-label">Home</div></div>
+              <div><div class="phone-frame"><img src="dofocus-02-focus.jpg" alt="DoFocus timer: presets above a rotary dial" loading="lazy"></div><div class="media-label">Set a block</div></div>
+              <div><div class="phone-frame"><img src="dofocus-03-session.jpg" alt="DoFocus mid-session: the buddy working at a laptop" loading="lazy"></div><div class="media-label">In session</div></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02: Biblely -->
+      <div class="project-card" id="proj-biblely">
+        <div class="card-header">
+          <div class="card-num">02</div>
           <div class="card-title-wrap">
             <div class="card-category">UX Design · App Design · Bilingual</div>
             <h3 class="card-title">Biblely — Bilingual Faith Learning App</h3>
@@ -205,10 +240,10 @@
         </div>
       </div>
 
-      <!-- 02: TryOn Buddy -->
+      <!-- 03: TryOn Buddy -->
       <div class="project-card" id="proj-tryon">
         <div class="card-header">
-          <div class="card-num">02</div>
+          <div class="card-num">03</div>
           <div class="card-title-wrap">
             <div class="card-category">UX Design · AI · Prototyping</div>
             <h3 class="card-title">TryOn Buddy – AI Fashion App</h3>
@@ -238,10 +273,10 @@
         </div>
       </div>
 
-      <!-- 03: Excel Gum Rebrand -->
+      <!-- 04: Excel Gum Rebrand -->
       <div class="project-card" id="proj-excel">
         <div class="card-header">
-          <div class="card-num">03</div>
+          <div class="card-num">04</div>
           <div class="card-title-wrap">
             <div class="card-category">Branding · Social Media · Campaign</div>
             <h3 class="card-title">Excel Gum Rebrand</h3>
@@ -284,10 +319,10 @@
         </div>
       </div>
 
-      <!-- 04: CAN Talk -->
+      <!-- 05: CAN Talk -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">04</div>
+          <div class="card-num">05</div>
           <div class="card-title-wrap">
             <div class="card-category">UX · App Design · Figma</div>
             <h3 class="card-title">CAN Talk App Design</h3>
@@ -317,10 +352,10 @@
         </div>
       </div>
 
-      <!-- 05: Audio Documentary -->
+      <!-- 06: Audio Documentary -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">05</div>
+          <div class="card-num">06</div>
           <div class="card-title-wrap">
             <div class="card-category">Audio · Documentary · Storytelling</div>
             <h3 class="card-title">Audio Documentary</h3>
@@ -342,10 +377,10 @@
         </div>
       </div>
 
-      <!-- 06: Antiques in Time -->
+      <!-- 07: Antiques in Time -->
       <div class="project-card" id="proj-antiques">
         <div class="card-header">
-          <div class="card-num">06</div>
+          <div class="card-num">07</div>
           <div class="card-title-wrap">
             <div class="card-category">Documentary · Film · Interview</div>
             <h3 class="card-title">Antiques in Time Documentary</h3>
@@ -365,10 +400,10 @@
         </div>
       </div>
 
-      <!-- 07: AI Certificate Brochure -->
+      <!-- 08: AI Certificate Brochure -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">07</div>
+          <div class="card-num">08</div>
           <div class="card-title-wrap">
             <div class="card-category">Print Design · InDesign · WatSPEED</div>
             <h3 class="card-title">Artificial Intelligence Certificate — Program Brochure</h3>
@@ -400,10 +435,10 @@
         </div>
       </div>
 
-      <!-- 08: Before I Forget -->
+      <!-- 09: Before I Forget -->
       <div class="project-card" id="proj-before-i-forget">
         <div class="card-header">
-          <div class="card-num">08</div>
+          <div class="card-num">09</div>
           <div class="card-title-wrap">
             <div class="card-category">Interaction Design · JavaScript · p5.js · Figma</div>
             <h3 class="card-title">Before I Forget — Interactive Narrative Game</h3>
@@ -426,10 +461,10 @@
         </div>
       </div>
 
-      <!-- 09: CS Games -->
+      <!-- 10: CS Games -->
       <div class="project-card">
         <div class="card-header">
-          <div class="card-num">09</div>
+          <div class="card-num">10</div>
           <div class="card-title-wrap">
             <div class="card-category">Game Design · JavaScript · p5.js</div>
             <h3 class="card-title">My Little House &amp; Harvest Heaven</h3>
@@ -456,10 +491,10 @@
         </div>
       </div>
 
-      <!-- 10: WaterlooWorks Redesign -->
+      <!-- 11: WaterlooWorks Redesign -->
       <div class="project-card" id="proj-waterlooworks">
         <div class="card-header">
-          <div class="card-num">10</div>
+          <div class="card-num">11</div>
           <div class="card-title-wrap">
             <div class="card-category">UX Design · Interaction · Prototype</div>
             <h3 class="card-title">WaterlooWorks — Employer Page Redesign</h3>
@@ -473,8 +508,8 @@
               <a class="card-link" href="./waterlooworks.html" target="_blank">View Live Prototype →</a>
             </div>
             <div class="media-full">
-              <div style="width:100%; height:560px; border:1px solid var(--border); overflow:hidden; background:#f4f4f4;">
-                <iframe src="./waterlooworks.html" title="WaterlooWorks Employer Redesign" scrolling="no" style="width:100%; height:560px; border:none; display:block;"></iframe>
+              <div class="proto-scale">
+                <iframe src="./waterlooworks.html" title="WaterlooWorks Employer Redesign Prototype" loading="lazy"></iframe>
               </div>
               <div class="media-label">WaterlooWorks · Employer Job Posting Redesign · Live Interactive Prototype</div>
             </div>
@@ -534,6 +569,12 @@
             setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
           }
         }
+      });
+      // Fit each desktop prototype to its frame: scale = frame width / 1280.
+      document.querySelectorAll('.proto-scale').forEach(function (box) {
+        new ResizeObserver(function (entries) {
+          box.style.setProperty('--proto-scale', entries[0].contentRect.width / 1280);
+        }).observe(box);
       });
     </script>
   </body>
